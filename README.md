@@ -17,7 +17,7 @@ Here is [documents](https://manual.pigjian.com/)
 ## Installation
 
 ```javascript
-npm install v-distpicker --save<
+npm install v-distpicker --save
 ```
 
 Or
