@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+<div id="app">
+  <distpicker></distpicker>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script src="./dist/v-distpicker.js"></script>
+<script>
+  Vue.component('distpicker', Vue.extend(VDistpicker))
+  new Vue({
+    el: '#app'
+  })
+</script>
+</body>
+</html>

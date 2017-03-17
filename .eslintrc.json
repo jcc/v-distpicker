@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "warn",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "arrow-parens": 0,
+    "generator-star-spacing": 0,
+    "space-before-function-paren": 0
+  }
+}

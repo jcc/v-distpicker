@@ -1,0 +1,99 @@
+.wrapper {
+  color: #6289ad;
+}
+.container {
+  max-width: 767px;
+  margin: 30px auto;
+}
+h5 {
+  margin-bottom: 20px;
+}
+pre {
+  color: #6289ad;
+  border: 1px solid #f8f8f8;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+.table {
+  font-size: 14px;
+  font-weight: 300;
+}
+.table th {
+  background-color: #eee;
+}
+
+.logo {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.logo .description {
+  font-size: 16px;
+  color: #979797;
+}
+.logo .description small {
+  font-size: 14px;
+  color: #ABD3B4;
+}
+
+.blocks {
+  text-align: left;
+  width: 100%;
+}
+.blocks .block {
+  margin-top: 30px;
+}
+
+.mobile {
+  margin-top: 30px;
+}
+
+.address-wrapper {
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+.address-container {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.heart {
+  position: relative;
+}
+.heart:before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  display: block;
+  height: 0;
+  border-top: 1px solid #ebf2f4;
+  content: " ";
+}
+.heart::after {
+  position: relative;
+  z-index: 1;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: rgb(255, 255, 255);
+  color: #ebf2f4;
+  content: "♥";
+}
+.heart:hover::after {
+    color: #ABD3B4;
+}
+a.nav-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #9caebf;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+a.nav-link:hover {
+  color: #52697f;
+}
+
