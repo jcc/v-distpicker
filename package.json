@@ -1,13 +1,29 @@
 {
   "name": "v-distpicker",
-  "version": "0.1.0",
   "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
+  "version": "0.1.0",
   "author": "jcc <changejian@gmail.com>",
-  "private": true,
+  "license": "MIT",
+  "repository": "jcc/v-distpicker",
   "main": "dist/v-distpicker.js",
   "files": [
     "src",
     "dist/*.js"
+  ],
+  "keywords": [
+    "省份",
+    "城市",
+    "地区",
+    "省市区",
+    "province",
+    "city",
+    "district",
+    "picker",
+    "plugin",
+    "javascript",
+    "development",
+    "vue",
+    "component"
   ],
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --config=./build/webpack.dev.config.js",
