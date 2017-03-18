@@ -130,12 +130,20 @@ export default {
       this.currentCity = this.placeholders.city
       this.currentArea = this.placeholders.area
       this.cities = this.getDistricts(this.getAreaCode(this.currentProvince))
-      if (this.cities == null) this.emit('selected')
+      if (this.cities == null) {
+        this.emit('selected')
+        this.tab = 1
+        this.showCityTab = false
+      }
     },
     getAreas() {
       this.currentArea = this.placeholders.area
       this.areas = this.getDistricts(this.getAreaCode(this.currentCity))
-      if (this.areas == null) this.emit('selected')
+      if (this.areas == null) {
+        this.emit('selected')
+        this.tab = 2
+        this.showAreaTab = false
+      }
     },
     resetProvince() {
       this.tab = 1
@@ -145,25 +153,25 @@ export default {
     },
     resetCity() {
       this.tab = 2
-      this.getCities()
       this.showCityTab = true
       this.showAreaTab = false
+      this.getCities()
     },
     chooseProvince(name) {
       this.currentProvince = name
       if (this.onlyProvince) return
       this.tab = 2
-      this.getCities()
       this.showCityTab = true
       this.showAreaTab = false
+      this.getCities()
     },
     chooseCity(name) {
       this.currentCity = name
       if (this.hideArea) return
       this.tab = 3
-      this.getAreas()
       this.showCityTab = true
       this.showAreaTab = true
+      this.getAreas()
     },
     chooseArea(name) {
       this.currentArea = name
