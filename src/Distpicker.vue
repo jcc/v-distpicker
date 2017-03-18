@@ -130,10 +130,12 @@ export default {
       this.currentCity = this.placeholders.city
       this.currentArea = this.placeholders.area
       this.cities = this.getDistricts(this.getAreaCode(this.currentProvince))
+      if (this.cities == null) this.emit('selected')
     },
     getAreas() {
       this.currentArea = this.placeholders.area
       this.areas = this.getDistricts(this.getAreaCode(this.currentCity))
+      if (this.areas == null) this.emit('selected')
     },
     resetProvince() {
       this.tab = 1

@@ -1,10 +1,11 @@
 <p align="center">
-<img src="https://pigjian.com/images/v-distpicker.png" alt="Powered By Jiajian Chan" width="100">
+<img src="https://pigjian.com/images/v-distpicker.png" alt="Powered By Jiajian Chan" width="160">
 </p>
 
 <p align="center">A flexible, highly available district selector for picking provinces, cities and districts of China.</p>
 
 # V - Distpicker
+
 Here is [documents](http://distpicker.iline.co/)
 
 ## Installation
