@@ -1,14 +1,19 @@
-.wrapper {
-  color: #6289ad;
-}
 .container {
   max-width: 767px;
   margin: 30px auto;
+  color: #6289ad;
+}
+@media screen and (max-width: 767px) {
+  .container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 }
 h5 {
   margin-bottom: 20px;
 }
 pre {
+  margin-top: 1rem;
   color: #6289ad;
   border: 1px solid #f8f8f8;
   padding: 15px;
@@ -96,4 +101,3 @@ a.nav-link {
 a.nav-link:hover {
   color: #52697f;
 }
-

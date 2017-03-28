@@ -19,10 +19,10 @@
     <template v-else>
       <div :class="addressHeader">
         <ul>
-          <li :class="{'active': tab == 1}" @click="resetProvince">{{ currentProvince ? currentProvince : placeholders.province }}</li>
+          <li :class="{'active': tab == 1}" @click="resetProvince">{{ currentProvince && !defaultSelectedPlaceholder ? currentProvince : placeholders.province }}</li>
           <template v-if="!onlyProvince">
-            <li v-if="showCityTab" :class="{'active': tab == 2}" @click="resetCity">{{  currentCity ? currentCity : placeholders.city }}</li>
-            <li v-if="showAreaTab && !hideArea" :class="{'active': tab == 3}">{{ currentArea ? currentArea : placeholders.area }}</li>
+            <li v-if="showCityTab" :class="{'active': tab == 2}" @click="resetCity">{{  currentCity && !defaultSelectedPlaceholder ? currentCity : placeholders.city }}</li>
+            <li v-if="showAreaTab && !hideArea" :class="{'active': tab == 3}">{{ currentArea && !defaultSelectedPlaceholder ? currentArea : placeholders.area }}</li>
           </template>
         </ul>
       </div>
@@ -57,6 +57,7 @@ export default {
     type: { type: String, default: '' },
     hideArea: { type: Boolean, default: false },
     onlyProvince: { type: Boolean, default: false },
+    defaultSelectedPlaceholder: { type: Boolean, default: false },
     placeholders: {
       type: Object,
       default() {
