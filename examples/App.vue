@@ -60,7 +60,7 @@ export default {
 }
 &lt;/script&gt;</code></pre>
           <p>Example:</p>
-          <v-distpicker :default-selected-placeholder="false" @province="placeholderSelectProvince" @city="placeholderSelectCity" @area="placeholderSelectArea" :placeholders="placeholders"></v-distpicker>
+          <v-distpicker @province="placeholderSelectProvince" @city="placeholderSelectCity" @area="placeholderSelectArea" :placeholders="placeholders"></v-distpicker>
           <pre><code class="javascript language-json">{ province: "{{ placeholderSelect.province }}", city: "{{ placeholderSelect.city }}", area: "{{ placeholderSelect.area }}" }</code></pre>
         </div>
         <div class="block">
@@ -151,11 +151,11 @@ export default {
           <pre><code class="javascript language-json">{ province: "{{ onlyProvinceSelect.province }}" }</code></pre>
         </div>
         <div class="block mobile">
-          <h5>Default Selected Placeholder:</h5>
-          <pre><code class="javascript language-javascript">&lt;v-distpicker type="mobile" default-selected-placeholder&gt;&lt;/distpicker&gt;</code></pre>
+          <h5>Static Placeholder:</h5>
+          <pre><code class="javascript language-javascript">&lt;v-distpicker type="mobile" static-placeholder&gt;&lt;/distpicker&gt;</code></pre>
           <p>Example:</p>
-          <v-distpicker type="mobile" wrapper="address-wrapper" @province="defaultSelectedPlaceholderProvince" @city="defaultSelectedPlaceholderCity" @area="defaultSelectedPlaceholderArea" default-selected-placeholder></v-distpicker>
-          <pre><code class="javascript language-json">{ province: "{{ defaultSelectedPlaceholder.province }}", city: "{{ defaultSelectedPlaceholder.city }}", area: "{{ defaultSelectedPlaceholder.area }}" }</code></pre>
+          <v-distpicker type="mobile" wrapper="address-wrapper" @province="staticPlaceholderProvince" @city="staticPlaceholderCity" @area="staticPlaceholderArea" static-placeholder></v-distpicker>
+          <pre><code class="javascript language-json">{ province: "{{ staticPlaceholder.province }}", city: "{{ staticPlaceholder.city }}", area: "{{ staticPlaceholder.area }}" }</code></pre>
         </div>
         <div class="block mobile">
           <h5>Mobile Trigger Event:</h5>
@@ -217,6 +217,13 @@ export default {
           <tr>
             <td><strong>onlu-province</strong></td>
             <td><strong>只显示省份（选填）</strong></td>
+            <td>Boolean</td>
+            <td>true, false</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td><strong>static-placeholder</strong></td>
+            <td><strong>是否将占位符显示为已经选择的项（仅 type='mobile' 时有效）</strong></td>
             <td>Boolean</td>
             <td>true, false</td>
             <td>false</td>
@@ -316,7 +323,7 @@ export default {
       defaultValueSelect: { province: '广东省', city: '广州市', area: '海珠区' },
       hideAreaSelect: { province: '', city: '' },
       onlyProvinceSelect: { province: '' },
-      defaultSelectedPlaceholder: { province: '', city: '', area: '' },
+      staticPlaceholder: { province: '', city: '', area: '' },
     }
   },
   methods: {
@@ -392,16 +399,16 @@ export default {
       this.defaultProvinceSelect.area = value
       console.log(value);
     },
-    defaultSelectedPlaceholderProvince(value) {
-      this.defaultSelectedPlaceholder.province = value
+    staticPlaceholderProvince(value) {
+      this.staticPlaceholder.province = value
       console.log(value);
     },
-    defaultSelectedPlaceholderCity(value) {
-      this.defaultSelectedPlaceholder.city = value
+    staticPlaceholderCity(value) {
+      this.staticPlaceholder.city = value
       console.log(value);
     },
-    defaultSelectedPlaceholderArea(value) {
-      this.defaultSelectedPlaceholder.area = value
+    staticPlaceholderArea(value) {
+      this.staticPlaceholder.area = value
       console.log(value);
     },
     onSelected(data) {
