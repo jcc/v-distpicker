@@ -130,7 +130,8 @@ export default {
     getCities() {
       this.currentCity = this.placeholders.city
       this.currentArea = this.placeholders.area
-      this.cities = this.getDistricts(this.getAreaCode(this.currentProvince))
+      this.cities = this.determineValue(this.currentProvince, this.placeholders.province)
+      this.cleanList('areas')
       if (this.cities == null) {
         this.emit('selected')
         this.tab = 1
@@ -139,7 +140,7 @@ export default {
     },
     getAreas() {
       this.currentArea = this.placeholders.area
-      this.areas = this.getDistricts(this.getAreaCode(this.currentCity))
+      this.areas = this.determineValue(this.currentCity, this.placeholders.city)
       if (this.areas == null) {
         this.emit('selected')
         this.tab = 2
@@ -188,7 +189,17 @@ export default {
     },
     getDistricts(code = DEFAULT_CODE) {
       return DISTRICTS[code] || null
-    }
+    },
+    determineValue(currentValue, placeholderValue) {
+      if(currentValue == placeholderValue) {
+        return []
+      } else {
+        return this.getDistricts(this.getAreaCode(currentValue))
+      }
+    },
+    cleanList(name) {
+      this[name] = []
+    },
   }
 }
 </script>
