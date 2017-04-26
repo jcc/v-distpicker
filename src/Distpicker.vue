@@ -51,9 +51,9 @@ const DEFAULT_CODE = 100000
 export default {
   name: 'v-dispicker',
   props: {
-    province: { type: String },
-    city: { type: String },
-    area: { type: String },
+    province: { type: String, default: '' },
+    city: { type: String, default: '' },
+    area: { type: String, default: '' },
     type: { type: String, default: '' },
     hideArea: { type: Boolean, default: false },
     onlyProvince: { type: Boolean, default: false },
@@ -117,6 +117,17 @@ export default {
     currentArea(value) {
       this.$emit('area', value)
       if (value != this.placeholders.area) this.emit('selected')
+    },
+    province(value) {
+      this.currentProvince = this.province || this.placeholders.province
+      this.cities = this.determineValue(this.currentProvince, this.placeholders.province)
+    },
+    city(value) {
+      this.currentCity = this.city || this.placeholders.city
+      this.areas = this.determineValue(this.currentCity, this.placeholders.city)
+    },
+    area(value) {
+      this.currentArea = this.area || this.placeholders.area
     },
   },
   methods: {
