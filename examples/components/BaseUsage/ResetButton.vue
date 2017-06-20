@@ -30,15 +30,15 @@ export default {
   },
   methods: {
     selectProvince(value) {
-      this.select.province = value
+      this.select.province = value.value
       console.log(value);
     },
     selectCity(value) {
-      this.select.city = value
+      this.select.city = value.value
       console.log(value);
     },
     selectArea(value) {
-      this.select.area = value
+      this.select.area = value.value
       console.log(value);
     },
     onSelected(data) {

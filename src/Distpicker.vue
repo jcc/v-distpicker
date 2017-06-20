@@ -51,9 +51,9 @@ const DEFAULT_CODE = 100000
 export default {
   name: 'v-dispicker',
   props: {
-    province: { type: String, default: '' },
-    city: { type: String, default: '' },
-    area: { type: String, default: '' },
+    province: { type: [String, Number], default: '' },
+    city: { type: [String, Number], default: '' },
+    area: { type: [String, Number], default: '' },
     type: { type: String, default: '' },
     hideArea: { type: Boolean, default: false },
     onlyProvince: { type: Boolean, default: false },
@@ -80,26 +80,26 @@ export default {
       provinces: [],
       cities: [],
       areas: [],
-      currentProvince: this.province || this.placeholders.province,
-      currentCity: this.city || this.placeholders.city,
-      currentArea: this.area || this.placeholders.area,
+      currentProvince: this.determineType(this.province) || this.placeholders.province,
+      currentCity: this.determineType(this.city) || this.placeholders.city,
+      currentArea: this.determineType(this.area) || this.placeholders.area,
     }
   },
   created() {
     if (this.type != 'mobile') {
       this.provinces = this.getDistricts()
-      this.cities = this.province ? this.getDistricts(this.getAreaCode(this.province)) : []
-      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.city)) : []
+      this.cities = this.province ? this.getDistricts(this.getAreaCode(this.determineType(this.province))) : []
+      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city))) : []
     } else {
       if (this.area && !this.hideArea && !this.onlyProvince) {
         this.tab = 3
         this.showCityTab = true
         this.showAreaTab = true
-        this.areas = this.getDistricts(this.getAreaCode(this.city))
+        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city)))
       } else if (this.city && this.hideArea && !this.onlyProvince) {
         this.tab = 2
         this.showCityTab = true
-        this.cities = this.getDistricts(this.getAreaCode(this.province))
+        this.cities = this.getDistricts(this.getAreaCode(this.determineType(this.province)))
       } else {
         this.provinces = this.getDistricts()
       }
@@ -107,15 +107,24 @@ export default {
   },
   watch: {
     currentProvince(vaule) {
-      this.$emit('province', this.currentProvince)
+      this.$emit('province', {
+        code: this.getAreaCode(this.currentProvince),
+        value: this.currentProvince,
+      })
       if (this.onlyProvince) this.emit('selected')
     },
     currentCity(value) {
-      this.$emit('city', value)
+      this.$emit('city', {
+        code: this.getAreaCode(value),
+        value: value,
+      })
       if (value != this.placeholders.city && this.hideArea) this.emit('selected')
     },
     currentArea(value) {
-      this.$emit('area', value)
+      this.$emit('area', {
+        code: this.getAreaCode(value),
+        value: value,
+      })
       if (value != this.placeholders.area) this.emit('selected')
     },
     province(value) {
@@ -132,11 +141,28 @@ export default {
   },
   methods: {
     emit(name) {
-      this.$emit(name, {
-        province: this.currentProvince,
-        city: this.onlyProvince ? '' : this.currentCity,
-        area: this.hideArea || this.onlyProvince ? '' : this.currentArea,
-      })
+      let data = {
+        province: {
+          code: this.getAreaCode(this.currentProvince),
+          value: this.currentProvince,
+        }
+      }
+
+      if (!this.onlyProvince) {
+        this.$set(data, 'city', {
+          code: this.getAreaCode(this.currentCity),
+          value: this.currentCity,
+        })
+      }
+
+      if (!this.onlyProvince || this.hideArea) {
+        this.$set(data, 'area', {
+          code: this.getAreaCode(this.currentArea),
+          value: this.currentArea,
+        })
+      }
+
+      this.$emit(name, data)
     },
     getCities() {
       this.currentCity = this.placeholders.city
@@ -198,6 +224,15 @@ export default {
         }
       }
     },
+    getCodeValue(code) {
+      for(var x in DISTRICTS) {
+        for(var y in DISTRICTS[x]) {
+          if(code == y) {
+            return DISTRICTS[x][y]
+          }
+        }
+      }
+    },
     getDistricts(code = DEFAULT_CODE) {
       return DISTRICTS[code] || null
     },
@@ -207,6 +242,13 @@ export default {
       } else {
         return this.getDistricts(this.getAreaCode(currentValue))
       }
+    },
+    determineType(value) {
+      if(typeof value === 'number') {
+        return this.getCodeValue(value)
+      }
+
+      return value
     },
     cleanList(name) {
       this[name] = []

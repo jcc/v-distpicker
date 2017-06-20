@@ -63,7 +63,7 @@ export default {
       console.log(value);
     },
     onSelected(data) {
-      alert(data.province + ' | ' + data.city + ' | ' + data.area)
+      alert(data.province.value + ' | ' + data.city.value + ' | ' + data.area.value)
       console.log(data)
     },
   },
