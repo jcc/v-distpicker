@@ -49,7 +49,7 @@ import DISTRICTS from './districts';
 const DEFAULT_CODE = 100000
 
 export default {
-  name: 'v-dispicker',
+  name: 'v-distpicker',
   props: {
     province: { type: [String, Number], default: '' },
     city: { type: [String, Number], default: '' },
