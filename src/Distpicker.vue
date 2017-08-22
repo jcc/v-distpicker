@@ -107,24 +107,15 @@ export default {
   },
   watch: {
     currentProvince(vaule) {
-      this.$emit('province', {
-        code: this.getAreaCode(this.currentProvince),
-        value: this.currentProvince,
-      })
+      this.$emit('province', this.setData(vaule))
       if (this.onlyProvince) this.emit('selected')
     },
     currentCity(value) {
-      this.$emit('city', {
-        code: this.getAreaCode(value),
-        value: value,
-      })
+      this.$emit('city', this.setData(value))
       if (value != this.placeholders.city && this.hideArea) this.emit('selected')
     },
     currentArea(value) {
-      this.$emit('area', {
-        code: this.getAreaCode(value),
-        value: value,
-      })
+      this.$emit('area', this.setData(value, this.currentCity))
       if (value != this.placeholders.area) this.emit('selected')
     },
     province(value) {
@@ -140,26 +131,23 @@ export default {
     },
   },
   methods: {
+    setData(value, check = '') {
+      return {
+        code: this.getAreaCode(value, check),
+        value: value,
+      }
+    },
     emit(name) {
       let data = {
-        province: {
-          code: this.getAreaCode(this.currentProvince),
-          value: this.currentProvince,
-        }
+        province: this.setData(this.currentProvince)
       }
 
       if (!this.onlyProvince) {
-        this.$set(data, 'city', {
-          code: this.getAreaCode(this.currentCity),
-          value: this.currentCity,
-        })
+        this.$set(data, 'city', this.setData(this.currentCity))
       }
 
       if (!this.onlyProvince || this.hideArea) {
-        this.$set(data, 'area', {
-          code: this.getAreaCode(this.currentArea),
-          value: this.currentArea,
-        })
+        this.$set(data, 'area', this.setData(this.currentArea))
       }
 
       this.$emit(name, data)
@@ -215,11 +203,19 @@ export default {
     chooseArea(name) {
       this.currentArea = name
     },
-    getAreaCode(name) {
+    getAreaCode(name, check = '') {
       for(var x in DISTRICTS) {
         for(var y in DISTRICTS[x]) {
           if(name == DISTRICTS[x][y]) {
-            return y
+            if (check.length > 0) {
+              if (y.slice(0, 5) !== this.getAreaCode(check).slice(0, 5)) {
+                continue
+              } else {
+                return y
+              }
+            } else {
+              return y
+            }
           }
         }
       }
