@@ -111,7 +111,7 @@ export default {
       if (this.onlyProvince) this.emit('selected')
     },
     currentCity(value) {
-      this.$emit('city', this.setData(value))
+      this.$emit('city', this.setData(value, this.currentProvince))
       if (value != this.placeholders.city && this.hideArea) this.emit('selected')
     },
     currentArea(value) {
@@ -208,7 +208,7 @@ export default {
         for(var y in DISTRICTS[x]) {
           if(name == DISTRICTS[x][y]) {
             if (check.length > 0) {
-              if (y.slice(0, 5) !== this.getAreaCode(check).slice(0, 5)) {
+              if (y.slice(0, 3) !== this.getAreaCode(check).slice(0, 3)) {
                 continue
               } else {
                 return y
