@@ -208,7 +208,7 @@ export default {
         for(var y in DISTRICTS[x]) {
           if(name == DISTRICTS[x][y]) {
             if (check.length > 0) {
-              if (y.slice(0, 3) !== this.getAreaCode(check).slice(0, 3)) {
+              if (y.slice(0, 2) !== this.getAreaCode(check).slice(0, 2)) {
                 continue
               } else {
                 return y
