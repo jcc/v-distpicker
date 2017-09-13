@@ -89,7 +89,7 @@ export default {
     if (this.type != 'mobile') {
       this.provinces = this.getDistricts()
       this.cities = this.province ? this.getDistricts(this.getAreaCode(this.determineType(this.province))) : []
-      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city))) : []
+      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city), this.area)) : []
     } else {
       if (this.area && !this.hideArea && !this.onlyProvince) {
         this.tab = 3
