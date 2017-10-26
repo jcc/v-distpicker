@@ -1,16 +1,16 @@
 <template>
   <div :class="wrapper">
     <template v-if="type != 'mobile'">
-      <select @change="getCities" v-model="currentProvince">
+      <select @change="getCities" v-model="currentProvince" :disabled="disabled">
         <option :value="placeholders.province">{{ placeholders.province }}</option>
         <option v-for="(item, index) in provinces" :value="item">{{ item }}</option>
       </select>
       <template v-if="!onlyProvince">
-        <select @change="getAreas" v-model="currentCity">
+        <select @change="getAreas" v-model="currentCity" :disabled="disabled">
           <option :value="placeholders.city">{{ placeholders.city }}</option>
           <option v-for="(item, index) in cities" :value="item">{{ item }}</option>
         </select>
-        <select v-if="!hideArea" v-model="currentArea">
+        <select v-if="!hideArea" v-model="currentArea" :disabled="disabled">
           <option :value="placeholders.area">{{ placeholders.area }}</option>
           <option v-for="(item, index) in areas " :value="item">{{ item }}</option>
         </select>
@@ -68,6 +68,7 @@ export default {
         }
       }
     },
+    disabled: { type: Boolean, default: false },
     wrapper: { type: String, default: 'address' },
     addressHeader: { type: String, default: 'address-header' },
     addressContainer: { type: String, default: 'address-container' },

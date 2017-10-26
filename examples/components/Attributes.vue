@@ -43,6 +43,13 @@
               <td>null</td>
             </tr>
             <tr>
+              <td><strong>disabled</strong></td>
+              <td><strong>是否禁用（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
               <td><strong>hide-area</strong></td>
               <td><strong>隐藏地区（选填）</strong></td>
               <td>Boolean</td>

@@ -23,7 +23,7 @@
               <td>返回城市的值</td>
             </tr>
             <tr>
-              <td><strong>city</strong></td>
+              <td><strong>area</strong></td>
               <td><strong>选择地区</strong></td>
               <td>返回地区的值</td>
             </tr>
