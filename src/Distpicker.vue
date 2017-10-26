@@ -95,7 +95,7 @@ export default {
         this.tab = 3
         this.showCityTab = true
         this.showAreaTab = true
-        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city)))
+        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city), this.area))
       } else if (this.city && this.hideArea && !this.onlyProvince) {
         this.tab = 2
         this.showCityTab = true
