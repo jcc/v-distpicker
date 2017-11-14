@@ -116,7 +116,7 @@ export default {
       if (value != this.placeholders.city && this.hideArea) this.emit('selected')
     },
     currentArea(value) {
-      this.$emit('area', this.setData(value, this.currentCity))
+      this.$emit('area', this.setData(value, this.currentProvince))
       if (value != this.placeholders.area) this.emit('selected')
     },
     province(value) {
