@@ -10,7 +10,8 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'v-distpicker.js',
     library: 'VDistpicker',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
