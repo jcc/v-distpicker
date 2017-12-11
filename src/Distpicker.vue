@@ -231,7 +231,7 @@ export default {
       }
     },
     getDistricts(code = DEFAULT_CODE) {
-      return DISTRICTS[code] || null
+      return DISTRICTS[code] || []
     },
     determineValue(currentValue, placeholderValue, check = '') {
       if(currentValue == placeholderValue) {
