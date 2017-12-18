@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapper">
+  <div :class="distpicker-wrapper">
     <template v-if="type != 'mobile'">
       <select @change="getCities" v-model="currentProvince" :disabled="disabled">
         <option :value="placeholders.province">{{ placeholders.province }}</option>
@@ -254,76 +254,78 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.address {
-  color: #9caebf;
-}
-select {
-  padding: .5rem .75rem;
-  height: 40px;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #464a4c;
-  background-color: #fff;
-  background-image: none;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: .25rem;
-  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-
-  option {
-    font-weight: normal;
-    display: block;
-    white-space: pre;
-    min-height: 1.2em;
-    padding: 0px 2px 1px;
+<style lang="scss">
+.distpicker-wrapper {
+  .address {
+    color: #9caebf;
   }
-}
-ul {
-  margin: 0;
-  padding: 0;
+  select {
+    padding: .5rem .75rem;
+    height: 40px;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 
-  li {
-    list-style: none;
+    option {
+      font-weight: normal;
+      display: block;
+      white-space: pre;
+      min-height: 1.2em;
+      padding: 0px 2px 1px;
+    }
   }
-}
-.address-header {
-  background-color: #fff;
-
   ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
+    margin: 0;
+    padding: 0;
 
     li {
-      display: inline-block;
-      padding: 10px 10px 7px;
+      list-style: none;
+    }
+  }
+  .address-header {
+    background-color: #fff;
 
-      &.active {
-        border-bottom: #52697f solid 3px;
-        color: #52697f;
+    ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: stretch;
+
+      li {
+        display: inline-block;
+        padding: 10px 10px 7px;
+
+        &.active {
+          border-bottom: #52697f solid 3px;
+          color: #52697f;
+        }
       }
     }
   }
-}
-.address-container {
-  background-color: #fff;
+  .address-container {
+    background-color: #fff;
 
-  ul {
-    height: 100%;
-    overflow: auto;
+    ul {
+      height: 100%;
+      overflow: auto;
 
-    li {
-      padding: 8px 10px;
-      border-top: 1px solid #f6f6f6;
+      li {
+        padding: 8px 10px;
+        border-top: 1px solid #f6f6f6;
 
-      &.active {
-        color: #52697f;
+        &.active {
+          color: #52697f;
+        }
       }
     }
   }
