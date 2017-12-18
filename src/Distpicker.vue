@@ -1,41 +1,68 @@
 <template>
-  <div :class="distpicker-wrapper">
+  <div class="distpicker-address-wrapper">
     <template v-if="type != 'mobile'">
       <select @change="getCities" v-model="currentProvince" :disabled="disabled">
         <option :value="placeholders.province">{{ placeholders.province }}</option>
-        <option v-for="(item, index) in provinces" :value="item">{{ item }}</option>
+        <option v-for="(item, index) in provinces"
+                :value="item"
+                :key="index">
+          {{ item }}
+        </option>
       </select>
       <template v-if="!onlyProvince">
         <select @change="getAreas" v-model="currentCity" :disabled="disabled">
           <option :value="placeholders.city">{{ placeholders.city }}</option>
-          <option v-for="(item, index) in cities" :value="item">{{ item }}</option>
+          <option v-for="(item, index) in cities"
+                  :value="item"
+                  :key="index">
+            {{ item }}
+          </option>
         </select>
         <select v-if="!hideArea && areas.length != 0" v-model="currentArea" :disabled="disabled">
           <option :value="placeholders.area">{{ placeholders.area }}</option>
-          <option v-for="(item, index) in areas " :value="item">{{ item }}</option>
+          <option v-for="(item, index) in areas "
+                  :value="item"
+                  :key="index">
+            {{ item }}
+          </option>
         </select>
       </template>
     </template>
     <template v-else>
       <div :class="addressHeader">
         <ul>
-          <li :class="{'active': tab == 1}" @click="resetProvince">{{ currentProvince && !staticPlaceholder ? currentProvince : placeholders.province }}</li>
+          <li :class="{'active': tab === 1}" @click="resetProvince">{{ currentProvince && !staticPlaceholder ? currentProvince : placeholders.province }}</li>
           <template v-if="!onlyProvince">
-            <li v-if="showCityTab" :class="{'active': tab == 2}" @click="resetCity">{{  currentCity && !staticPlaceholder ? currentCity : placeholders.city }}</li>
-            <li v-if="showAreaTab && !hideArea" :class="{'active': tab == 3}">{{ currentArea && !staticPlaceholder ? currentArea : placeholders.area }}</li>
+            <li v-if="showCityTab" :class="{'active': tab === 2}" @click="resetCity">{{  currentCity && !staticPlaceholder ? currentCity : placeholders.city }}</li>
+            <li v-if="showAreaTab && !hideArea" :class="{'active': tab === 3}">{{ currentArea && !staticPlaceholder ? currentArea : placeholders.area }}</li>
           </template>
         </ul>
       </div>
       <div :class="addressContainer">
-        <ul v-if="tab == 1">
-          <li v-for="(item, index) in provinces" :class="{'active': item == currentProvince}" @click="chooseProvince(item)">{{ item }}</li>
+        <ul v-if="tab === 1">
+          <li v-for="(item, index) in provinces"
+              :class="{'active': item === currentProvince}"
+              @click="chooseProvince(item)"
+              :key="index">
+            {{ item }}
+          </li>
         </ul>
         <template v-if="!onlyProvince">
-          <ul v-if="tab == 2">
-            <li v-for="(item, index) in cities" :class="{'active': item == currentCity}" @click="chooseCity(item)">{{ item }}</li>
+          <ul v-if="tab === 2">
+            <li v-for="(item, index) in cities"
+                :class="{'active': item === currentCity}"
+                @click="chooseCity(item)"
+                :key="index">
+              {{ item }}
+            </li>
           </ul>
-          <ul v-if="tab == 3 && !hideArea">
-            <li v-for="(item, index) in areas" :class="{'active': item == currentArea}" @click="chooseArea(item)">{{ item }}</li>
+          <ul v-if="tab === 3 && !hideArea">
+            <li v-for="(item, index) in areas"
+                :class="{'active': item === currentArea}"
+                @click="chooseArea(item)"
+                :key="index">
+              {{ item }}
+            </li>
           </ul>
         </template>
       </div>
@@ -69,7 +96,6 @@ export default {
       }
     },
     disabled: { type: Boolean, default: false },
-    wrapper: { type: String, default: 'address' },
     addressHeader: { type: String, default: 'address-header' },
     addressContainer: { type: String, default: 'address-container' },
   },
@@ -158,7 +184,7 @@ export default {
       this.currentArea = this.placeholders.area
       this.cities = this.determineValue(this.currentProvince, this.placeholders.province)
       this.cleanList('areas')
-      if (this.cities == null) {
+      if (this.cities === null) {
         this.emit('selected')
         this.tab = 1
         this.showCityTab = false
@@ -167,7 +193,7 @@ export default {
     getAreas() {
       this.currentArea = this.placeholders.area
       this.areas = this.determineValue(this.currentCity, this.placeholders.city, this.currentProvince)
-      if (this.areas == null) {
+      if (this.areas === null) {
         this.emit('selected')
         this.tab = 2
         this.showAreaTab = false
@@ -205,9 +231,9 @@ export default {
       this.currentArea = name
     },
     getAreaCode(name, check = '') {
-      for(var x in DISTRICTS) {
-        for(var y in DISTRICTS[x]) {
-          if(name == DISTRICTS[x][y]) {
+      for(let x in DISTRICTS) {
+        for(let y in DISTRICTS[x]) {
+          if(name === DISTRICTS[x][y]) {
             if (check.length > 0) {
               if (y.slice(0, 2) !== this.getAreaCode(check).slice(0, 2)) {
                 continue
@@ -222,9 +248,9 @@ export default {
       }
     },
     getCodeValue(code) {
-      for(var x in DISTRICTS) {
-        for(var y in DISTRICTS[x]) {
-          if(code == y) {
+      for(let x in DISTRICTS) {
+        for(let y in DISTRICTS[x]) {
+          if(code === y) {
             return DISTRICTS[x][y]
           }
         }
@@ -234,7 +260,7 @@ export default {
       return DISTRICTS[code] || []
     },
     determineValue(currentValue, placeholderValue, check = '') {
-      if(currentValue == placeholderValue) {
+      if(currentValue === placeholderValue) {
         return []
       } else {
         return this.getDistricts(this.getAreaCode(currentValue, check))
@@ -255,10 +281,8 @@ export default {
 </script>
 
 <style lang="scss">
-.distpicker-wrapper {
-  .address {
-    color: #9caebf;
-  }
+.distpicker-address-wrapper {
+  color: #9caebf;
   select {
     padding: .5rem .75rem;
     height: 40px;
