@@ -248,9 +248,10 @@ export default {
       }
     },
     getCodeValue(code) {
+      console.log(code)
       for(let x in DISTRICTS) {
         for(let y in DISTRICTS[x]) {
-          if(code === y) {
+          if(code === parseInt(y)) {
             return DISTRICTS[x][y]
           }
         }
