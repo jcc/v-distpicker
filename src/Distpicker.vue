@@ -18,7 +18,7 @@
             {{ item }}
           </option>
         </select>
-        <select v-if="!hideArea && areas.length != 0" v-model="currentArea" :disabled="disabled">
+        <select v-if="!hideArea" v-model="currentArea" :disabled="disabled">
           <option :value="placeholders.area">{{ placeholders.area }}</option>
           <option v-for="(item, index) in areas "
                   :value="item"
