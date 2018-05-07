@@ -15,7 +15,7 @@
 
 # V - Distpicker
 
-Here is [documents](http://distpicker.iline.co/)
+Here is [documents](http://distpicker.pigjian.com/)
 
 ## Installation
 
