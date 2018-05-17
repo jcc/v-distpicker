@@ -230,12 +230,36 @@ export default {
     chooseArea(name) {
       this.currentArea = name
     },
+    getAreaCodeByPreCode(name, preCode) {
+      let codes = []
+
+      for(let x in DISTRICTS) {
+        for(let y in DISTRICTS[x]) {
+          if(name === DISTRICTS[x][y]) {
+            codes.push(y)
+          }
+        }
+      }
+
+      if (codes.length > 1) {
+        let index
+        codes.forEach((item, i) => {
+          if (item.slice(0, 2) == preCode) {
+            index = i
+          }
+        })
+
+        return codes[index]
+      } else {
+        return codes[0]
+      }
+    },
     getAreaCode(name, check = '') {
       for(let x in DISTRICTS) {
         for(let y in DISTRICTS[x]) {
           if(name === DISTRICTS[x][y]) {
             if (check.length > 0) {
-              if (y.slice(0, 2) !== this.getAreaCode(check).slice(0, 2)) {
+              if (y.slice(0, 2) !== this.getAreaCodeByPreCode(check, y.slice(0, 2)).slice(0, 2)) {
                 continue
               } else {
                 return y
@@ -248,7 +272,6 @@ export default {
       }
     },
     getCodeValue(code) {
-      console.log(code)
       for(let x in DISTRICTS) {
         for(let y in DISTRICTS[x]) {
           if(code === parseInt(y)) {
