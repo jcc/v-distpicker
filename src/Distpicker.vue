@@ -184,7 +184,7 @@ export default {
       this.currentArea = this.placeholders.area
       this.cities = this.determineValue(this.currentProvince, this.placeholders.province)
       this.cleanList('areas')
-      if (this.cities === null) {
+      if (this.cities.length === 0) {
         this.emit('selected')
         this.tab = 1
         this.showCityTab = false
@@ -193,7 +193,7 @@ export default {
     getAreas() {
       this.currentArea = this.placeholders.area
       this.areas = this.determineValue(this.currentCity, this.placeholders.city, this.currentProvince)
-      if (this.areas === null) {
+      if (this.areas.length === 0) {
         this.emit('selected')
         this.tab = 2
         this.showAreaTab = false
