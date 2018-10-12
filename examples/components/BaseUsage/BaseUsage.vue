@@ -8,6 +8,7 @@
     <only-province></only-province>
     <trigger-event></trigger-event>
     <reset-button></reset-button>
+    <disabled></disabled>
   </div>
 </template>
 
@@ -19,9 +20,11 @@ import HideArea from './HideArea'
 import OnlyProvince from './OnlyProvince'
 import TriggerEvent from './TriggerEvent'
 import ResetButton from './ResetButton'
+import Disabled from "./Disabled";
 
 export default {
   components: {
+	  Disabled,
     Basic,
     Placeholders,
     DefaultValue,

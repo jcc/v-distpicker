@@ -44,7 +44,28 @@
             </tr>
             <tr>
               <td><strong>disabled</strong></td>
-              <td><strong>是否禁用（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td><strong>是否禁用（选填，默认 false，且 type='mobile' 时无效，当disabled=true时province-disabled、city-disabled、area-disabled均无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>province-disabled</strong></td>
+              <td><strong>是否禁用省（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>city-disabled</strong></td>
+              <td><strong>是否禁用市（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>area-disabled</strong></td>
+              <td><strong>是否禁用区、县（选填，默认 false，且 type='mobile' 时无效）</strong></td>
               <td>Boolean</td>
               <td>true, false</td>
               <td>false</td>
