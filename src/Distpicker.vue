@@ -1,7 +1,7 @@
 <template>
   <div class="distpicker-address-wrapper">
     <template v-if="type != 'mobile'">
-      <select @change="getCities" v-model="currentProvince" :disabled="disabled">
+      <select @change="getCities" v-model="currentProvince" :disabled="disabled || provinceDisabled">
         <option :value="placeholders.province">{{ placeholders.province }}</option>
         <option v-for="(item, index) in provinces"
                 :value="item"
@@ -10,7 +10,7 @@
         </option>
       </select>
       <template v-if="!onlyProvince">
-        <select @change="getAreas" v-model="currentCity" :disabled="disabled">
+        <select @change="getAreas" v-model="currentCity" :disabled="disabled || cityDisabled">
           <option :value="placeholders.city">{{ placeholders.city }}</option>
           <option v-for="(item, index) in cities"
                   :value="item"
@@ -18,7 +18,7 @@
             {{ item }}
           </option>
         </select>
-        <select v-if="!hideArea" v-model="currentArea" :disabled="disabled">
+        <select v-if="!hideArea" v-model="currentArea" :disabled="disabled || areaDisabled">
           <option :value="placeholders.area">{{ placeholders.area }}</option>
           <option v-for="(item, index) in areas "
                   :value="item"
@@ -73,7 +73,7 @@
 <script>
 import DISTRICTS from './districts';
 
-const DEFAULT_CODE = 100000
+const DEFAULT_CODE = 100000;
 
 export default {
   name: 'v-distpicker',
@@ -96,6 +96,9 @@ export default {
       }
     },
     disabled: { type: Boolean, default: false },
+    provinceDisabled: { type: Boolean, default: false },
+    cityDisabled: { type: Boolean, default: false },
+    areaDisabled: { type: Boolean, default: false },
     addressHeader: { type: String, default: 'address-header' },
     addressContainer: { type: String, default: 'address-container' },
   },
@@ -378,4 +381,7 @@ export default {
     }
   }
 }
+    .disabled-color{
+        background: #f8f8f8;
+    }
 </style>
