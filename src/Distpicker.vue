@@ -177,7 +177,7 @@ export default {
       }
 
       if (!this.onlyProvince || this.hideArea) {
-        this.$set(data, 'area', this.setData(this.currentArea))
+        this.$set(data, 'area', this.setData(this.currentArea, this.currentCity))
       }
 
       this.$emit(name, data)
