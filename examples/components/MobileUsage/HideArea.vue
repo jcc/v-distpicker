@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker type="mobile" wrapper="address-wrapper" @province="selectProvince" @city="selectCity" hide-area></v-distpicker>
+            <v-distpicker type="mobile" @province="selectProvince" @city="selectCity" hide-area></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>

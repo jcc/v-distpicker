@@ -30,31 +30,27 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=./build/webpack.prod.config.js"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-stage-2": "^6.13.0",
-    "babel-runtime": "^6.26.0",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
     "cross-env": "^3.1.4",
-    "css-loader": "^0.23.0",
+    "css-loader": "^2.1.1",
     "eslint": "^3.12.2",
-    "eslint-loader": "^1.6.1",
-    "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.28.0",
-    "node-sass": "^4.9.4",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "vue-loader": "^10.3.0",
-    "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.3"
+    "eslint-loader": "^2.1.2",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "url-loader": "^1.1.2",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.0.1",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   }
 }

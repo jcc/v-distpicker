@@ -1,5 +1,5 @@
 <template>
-  <div class="distpicker-address-wrapper">
+  <div :class="wrapper">
     <template v-if="type != 'mobile'">
       <select @change="getCities" v-model="currentProvince" :disabled="disabled || provinceDisabled">
         <option :value="placeholders.province">{{ placeholders.province }}</option>
@@ -101,6 +101,7 @@ export default {
     areaDisabled: { type: Boolean, default: false },
     addressHeader: { type: String, default: 'address-header' },
     addressContainer: { type: String, default: 'address-container' },
+    wrapper: { type: String, default: 'distpicker-address-wrapper' },
   },
   data() {
     return {
@@ -146,7 +147,7 @@ export default {
     },
     currentArea(value) {
       this.$emit('area', this.setData(value, this.currentProvince))
-      if (value != this.placeholders.area) this.emit('selected')
+      this.emit('selected')
     },
     province(value) {
       this.currentProvince = this.province || this.placeholders.province
@@ -381,7 +382,7 @@ export default {
     }
   }
 }
-    .disabled-color{
-        background: #f8f8f8;
-    }
+.disabled-color{
+    background: #f8f8f8;
+}
 </style>

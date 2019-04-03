@@ -16,7 +16,6 @@ import Usage from './components/Usage'
 import Attributes from './components/Attributes'
 import Methods from './components/Methods'
 import Footbar from './components/Footer'
-import './css/styles.css'
 
 export default {
   components: {
@@ -29,3 +28,7 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+  @import './css/styles.css';
+</style>

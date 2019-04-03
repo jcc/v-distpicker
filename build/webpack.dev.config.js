@@ -1,8 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './examples/main.js',
+  mode: 'development',
   resolve: {
     extensions: ['*', '.js', '.vue'],
     alias: {
@@ -24,32 +26,33 @@ module.exports = {
       filename: path.resolve(__dirname, '../dist/dev/index.html'),
       template: 'examples/index.html',
       inject: true
-    })
+    }),
+    new VueLoaderPlugin()
   ],
   module: {
-    loaders: [{
+    rules: [{
       test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        loaders: {
-          scss: 'vue-style-loader!css-loader!sass-loader',
-          sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-        }
-      }
+      use: 'vue-loader'
     }, {
       test: /\.js$/,
-      loaders: ['babel-loader', 'eslint-loader'],
+      use: ['babel-loader', 'eslint-loader'],
       exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loader: 'style-loader!css-loader'
+      use: 'css-loader',
+    }, {
+      test: /\.scss$/,
+      use: ['vue-style-loader', 'css-loader', 'sass-loader']
     }, {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 10000,
-        name: 'img/[name].[hash:7].[ext]'
-      }
+      exclude: /node_modules/,
+      use: [{
+        loader: 'url-loader',
+        query: {
+          name: '[path][name].[ext]?[hash:8]',
+          limit: 8192
+        }
+      }]
     }]
   }
 }
