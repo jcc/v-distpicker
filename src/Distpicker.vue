@@ -146,7 +146,7 @@ export default {
       if (value != this.placeholders.city && this.hideArea) this.emit('selected')
     },
     currentArea(value) {
-      this.$emit('area', this.setData(value, this.currentProvince))
+      this.$emit('area', this.setData(value, this.currentProvince, true))
       this.emit('selected')
     },
     province(value) {
@@ -162,11 +162,27 @@ export default {
     },
   },
   methods: {
-    setData(value, check = '') {
+    setData(value, check = '', isArea = false) {
+      let code
+      if (isArea) {
+        code = this.getCodeByArea(value)
+      } else {
+        code = this.getAreaCode(value, check)
+      }
+
       return {
-        code: this.getAreaCode(value, check),
+        code: code,
         value: value,
       }
+    },
+    getCodeByArea(value) {
+      let code
+      Object.values(this.areas).forEach((item, key) => {
+        if (item === value) {
+          code = Object.keys(this.areas)[key]
+        }
+      })
+      return code
     },
     emit(name) {
       let data = {
@@ -263,7 +279,9 @@ export default {
         for(let y in DISTRICTS[x]) {
           if(name === DISTRICTS[x][y]) {
             if (check.length > 0) {
-              if (y.slice(0, 2) !== this.getAreaCodeByPreCode(check, y.slice(0, 2)).slice(0, 2)) {
+              let code = this.getAreaCodeByPreCode(check, y.slice(0, 2))
+
+              if (!code || y.slice(0, 2) !== code.slice(0, 2)) {
                 continue
               } else {
                 return y
