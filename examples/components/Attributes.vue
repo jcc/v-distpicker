@@ -78,7 +78,7 @@
               <td>false</td>
             </tr>
             <tr>
-              <td><strong>onlu-province</strong></td>
+              <td><strong>only-province</strong></td>
               <td><strong>只显示省份（选填）</strong></td>
               <td>Boolean</td>
               <td>true, false</td>
