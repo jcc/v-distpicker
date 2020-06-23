@@ -109,6 +109,12 @@ export default {
         }
       }
     },
+    districts: {
+      type: [Array, Object],
+      default() {
+        return DISTRICTS
+      }
+    },
     disabled: { type: Boolean, default: false },
     provinceDisabled: { type: Boolean, default: false },
     cityDisabled: { type: Boolean, default: false },
@@ -270,9 +276,9 @@ export default {
     getAreaCodeByPreCode(name, preCode) {
       let codes = []
 
-      for(let x in DISTRICTS) {
-        for(let y in DISTRICTS[x]) {
-          if(name === DISTRICTS[x][y]) {
+      for(let x in this.districts) {
+        for(let y in this.districts[x]) {
+          if(name === this.districts[x][y]) {
             codes.push(y)
           }
         }
@@ -292,9 +298,9 @@ export default {
       }
     },
     getAreaCode(name, check = '', type = '') {
-      for(let x in DISTRICTS) {
-        for(let y in DISTRICTS[x]) {
-          if(name === DISTRICTS[x][y]) {
+      for(let x in this.districts) {
+        for(let y in this.districts[x]) {
+          if(name === this.districts[x][y]) {
             if (check.length > 0) {
               let code = y
 
@@ -316,16 +322,16 @@ export default {
       }
     },
     getCodeValue(code) {
-      for(let x in DISTRICTS) {
-        for(let y in DISTRICTS[x]) {
+      for(let x in this.districts) {
+        for(let y in this.districts[x]) {
           if(code === parseInt(y)) {
-            return DISTRICTS[x][y]
+            return this.districts[x][y]
           }
         }
       }
     },
     getDistricts(code = DEFAULT_CODE) {
-      return DISTRICTS[code] || []
+      return this.districts[code] || []
     },
     determineValue(type, currentValue, placeholderValue, check = '') {
       if(currentValue === placeholderValue) {
