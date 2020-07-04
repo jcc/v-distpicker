@@ -140,13 +140,15 @@ export default {
     if (this.type !== 'mobile') {
       this.provinces = this.getDistricts()
       this.cities = this.province ? this.getDistricts(this.getAreaCode(this.determineType(this.province))) : []
-      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city), this.area)) : []
+      let directCity= this.isDirectCity(this.province,this.city)
+      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area)) : []
     } else {
       if (this.area && !this.hideArea && !this.onlyProvince) {
         this.tab = 3
         this.showCityTab = true
         this.showAreaTab = true
-        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city), this.area))
+        let directCity= this.isDirectCity(this.province,this.city)
+        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area))
       } else if (this.city && this.hideArea && !this.onlyProvince) {
         this.tab = 2
         this.showCityTab = true
@@ -349,6 +351,12 @@ export default {
     },
     cleanList(name) {
       this[name] = []
+    },
+    isDirectCity(province,city) {
+      if( province && city ){
+        return this.determineType(this.province) === this.determineType(this.city)
+      }
+       return false
     },
   }
 }
