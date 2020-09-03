@@ -169,7 +169,7 @@ export default {
     },
     currentArea(value) {
       this.$emit('area', this.setData(value, 'area', this.currentProvince, true))
-      this.emit('selected')
+      if (value != this.placeholders.area) this.emit('selected')
     },
     province(value) {
       this.currentProvince = this.province || this.placeholders.province
