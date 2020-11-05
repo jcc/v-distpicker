@@ -193,8 +193,6 @@ export default {
         code = this.getAreaCode(value, check, type)
       }
 
-      console.log(code, value)
-
       return {
         code: code,
         value: value,
@@ -306,9 +304,10 @@ export default {
             if (check.length > 0) {
               let code = y
 
-              if (name === check) {
-                let preCode = type === 'city' ? y.slice(0, 4) : y.slice(0, 2)
-                code = this.getAreaCodeByPreCode(check, preCode)
+              if (check) {
+                let preCode = type === 'city' ? this.getAreaCode(this.currentProvince).slice(0, 2) : y.slice(0, 2)
+
+                code = this.getAreaCodeByPreCode(name, preCode)
               }
 
               if (!code || y.slice(0, 2) !== code.slice(0, 2)) {
