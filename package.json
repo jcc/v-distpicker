@@ -1,7 +1,7 @@
 {
   "name": "v-distpicker",
   "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
   "repository": "jcc/v-distpicker",
