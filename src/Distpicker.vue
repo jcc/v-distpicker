@@ -161,15 +161,24 @@ export default {
   watch: {
     currentProvince(vaule) {
       this.$emit('province', this.setData(vaule, 'province'))
-      if (this.onlyProvince) this.emit('selected')
+
+      if (this.onlyProvince) {
+        this.emit('selected')
+      }
     },
     currentCity(value) {
       this.$emit('city', this.setData(value, 'city', this.currentProvince))
-      if (value != this.placeholders.city && this.hideArea) this.emit('selected')
+
+      if (value != this.placeholders.city && this.hideArea) {
+        this.emit('selected')
+      }
     },
     currentArea(value) {
       this.$emit('area', this.setData(value, 'area', this.currentProvince, true))
-      if (value != this.placeholders.area) this.emit('selected')
+
+      if (value != this.placeholders.area) {
+        this.emit('selected')
+      }
     },
     province(value) {
       this.currentProvince = this.province || this.placeholders.province
@@ -213,11 +222,11 @@ export default {
       }
 
       if (!this.onlyProvince) {
-        this.$set(data, 'city', this.setData(this.currentCity, 'city'))
+        this.$set(data, 'city', this.setData(this.currentCity, 'city', this.currentProvince))
       }
 
       if (!this.onlyProvince || this.hideArea) {
-        this.$set(data, 'area', this.setData(this.currentArea, 'area', this.currentCity))
+        this.$set(data, 'area', this.setData(this.currentArea, 'area', this.currentProvince, true))
       }
 
       this.$emit(name, data)
