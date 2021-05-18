@@ -175,7 +175,7 @@ export default {
     },
     currentArea(value) {
       this.$emit('area', this.setData(value, 'area', this.currentProvince, true))
-	 
+
       if (value != this.placeholders.area) {
         this.emit('selected')
       }
@@ -208,27 +208,14 @@ export default {
       }
     },
     getCodeByArea(value) {
-      let code
-	  
-      // Object.values(this.areas).forEach((item, key) => {
-      // if (item === value) {
-      //   code = Object.keys(this.areas)[key]
-      // }
-      //})
-      
-      //解决IE不兼容 Object.values问题
-      
-      //获取所有key
-	    var arr_keys = Object.keys(this.areas);
-      for (var i=0; i<arr_keys.length; i++) {
-        if (arr_keys[i] === value) {
-            code = Object.keys(this.areas)[i]
-          }
+      let areas_map = {};
+	    let arr_keys = Object.keys(this.areas);
+      for (let i = 0; i < arr_keys.length; i++) {
+        let arr_key = arr_keys[i];
+        let arr_value = this.areas[arr_key];
+        areas_map[arr_value] = arr_key;
       }
-	
-     
-	  
-      return code
+      return areas_map[value];
     },
     emit(name) {
       let data = {
