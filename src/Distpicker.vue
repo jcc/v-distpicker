@@ -141,14 +141,14 @@ export default {
       this.provinces = this.getDistricts()
       this.cities = this.province ? this.getDistricts(this.getAreaCode(this.determineType(this.province))) : []
       let directCity= this.isDirectCity(this.province,this.city)
-      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area)) : []
+      this.areas = this.city ? this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area, 'city')) : []
     } else {
       if (this.area && !this.hideArea && !this.onlyProvince) {
         this.tab = 3
         this.showCityTab = true
         this.showAreaTab = true
         let directCity= this.isDirectCity(this.province,this.city)
-        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area))
+        this.areas = this.getDistricts(this.getAreaCode(this.determineType(this.city), directCity ? this.determineType(this.city) : this.area, 'city'))
       } else if (this.city && this.hideArea && !this.onlyProvince) {
         this.tab = 2
         this.showCityTab = true
