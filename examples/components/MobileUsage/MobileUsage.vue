@@ -10,22 +10,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Basic from './Basic'
 import StaticPlaceholder from './StaticPlaceholder'
 import DefaultValue from './DefaultValue'
 import HideArea from './HideArea'
 import OnlyProvince from './OnlyProvince'
 import TriggerEvent from './TriggerEvent'
-
-export default {
-  components: {
-    Basic,
-    StaticPlaceholder,
-    DefaultValue,
-    HideArea,
-    OnlyProvince,
-    TriggerEvent,
-  },
-}
 </script>

@@ -1,15 +1,11 @@
 {
   "name": "v-distpicker",
-  "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
-  "version": "1.2.12",
+  "private": true,
+  "version": "2.0.0",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
   "repository": "jcc/v-distpicker",
   "main": "dist/v-distpicker.js",
-  "files": [
-    "src",
-    "dist/*.js"
-  ],
   "keywords": [
     "省份",
     "城市",
@@ -23,34 +19,23 @@
     "javascript",
     "development",
     "vue",
+    "vite",
     "component"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --config=./build/webpack.dev.config.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=./build/webpack.prod.config.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^3.2.25"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-runtime": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
-    "cross-env": "^3.1.4",
-    "css-loader": "^2.1.1",
-    "eslint": "^4.18.2",
-    "eslint-loader": "^2.1.2",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^7.1.0",
-    "url-loader": "^1.1.2",
-    "vue-loader": "^15.7.0",
-    "vue-style-loader": "^4.0.1",
-    "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "@vitejs/plugin-vue": "^2.3.0",
+    "eslint": "^8.12.0",
+    "eslint-plugin-vue": "^8.5.0",
+    "sass": "^1.49.11",
+    "sass-loader": "^12.6.0",
+    "vite": "^2.9.0"
   }
 }

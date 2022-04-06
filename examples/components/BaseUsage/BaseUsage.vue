@@ -12,7 +12,8 @@
   </div>
 </template>
 
-<script>
+
+<script setup>
 import Basic from './Basic'
 import Placeholders from './Placeholders'
 import DefaultValue from './DefaultValue'
@@ -20,18 +21,5 @@ import HideArea from './HideArea'
 import OnlyProvince from './OnlyProvince'
 import TriggerEvent from './TriggerEvent'
 import ResetButton from './ResetButton'
-import Disabled from "./Disabled";
-
-export default {
-  components: {
-	  Disabled,
-    Basic,
-    Placeholders,
-    DefaultValue,
-    HideArea,
-    OnlyProvince,
-    TriggerEvent,
-    ResetButton,
-  },
-}
+import Disabled from './Disabled'
 </script>

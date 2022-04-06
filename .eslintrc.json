@@ -1,6 +1,13 @@
 {
-  "parser": "babel-eslint",
+  "parser": "vue-eslint-parser",
+  "extends": [
+    "plugin:vue/vue3-recommended"
+  ],
+  "plugins": [
+    "vue"
+  ],
   "env": {
+    "vue/setup-compiler-macros": true,
     "browser": true,
     "commonjs": true,
     "es6": true,
@@ -28,6 +35,12 @@
     ],
     "arrow-parens": 0,
     "generator-star-spacing": 0,
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+    "vue/multi-word-component-names": "off",
+    "vue/max-attributes-per-line":"off",
+    "vue/require-default-prop": "off",
+    "vue/html-self-closing": "off",
+    "vue/singleline-html-element-content-newline":"off"
+
   }
 }

@@ -4,6 +4,8 @@
 
 <p align="center">A flexible, highly available district selector for picking provinces, cities and districts of China.</p>
 
+<p align="center"> base on Vue3</p>
+
 # V - Distpicker
 
 Here is [documents](http://distpicker.pigjian.com/)

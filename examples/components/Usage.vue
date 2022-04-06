@@ -8,14 +8,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import BaseUsage from './BaseUsage/BaseUsage'
 import MobileUsage from './MobileUsage/MobileUsage'
-
-export default {
-  components: {
-    BaseUsage,
-    MobileUsage,
-  },
-}
 </script>
