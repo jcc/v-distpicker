@@ -5,14 +5,16 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker @province="selectProvince" only-province></v-distpicker>
+            <v-distpicker only-province @province="selectProvince"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-right col-md-12" v-if="showCode">
-<pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+        <div v-if="showCode" class="box-right col-md-12">
+          <pre
+            class="language-javascript code-toolbar"
+          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker only<span class="token operator">-</span>province<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -32,22 +34,12 @@
   </div>
 </template>
 
-<script>
-import VDistpicker from '../../../src/Distpicker'
+<script setup>
+let showCode = $ref(false)
+let select = $ref({ province: '' })
 
-export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      showCode: false,
-      select: { province: '' },
-    }
-  },
-  methods: {
-    selectProvince(value) {
-      this.select.province = value
-      console.log(value);
-    },
-  },
+function selectProvince(value) {
+  select.province = value
+  console.log(value)
 }
 </script>

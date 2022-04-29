@@ -5,14 +5,16 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker type="mobile" @province="selectProvince" @city="selectCity" hide-area></v-distpicker>
+            <v-distpicker type="mobile" hide-area @province="selectProvince" @city="selectCity"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-right col-md-12" v-if="showCode">
-<pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+        <div v-if="showCode" class="box-right col-md-12">
+          <pre
+            class="language-javascript code-toolbar"
+          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker type<span class="token operator">=</span><span class="token string">"mobile"</span> hide<span class="token operator">-</span>area<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -32,26 +34,15 @@
   </div>
 </template>
 
-<script>
-import VDistpicker from '../../../src/Distpicker'
-
-export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      showCode: false,
-      select: { province: '', city: '' },
-    }
-  },
-  methods: {
-    selectProvince(value) {
-      this.select.province = value
-      console.log(value);
-    },
-    selectCity(value) {
-      this.select.city = value
-      console.log(value);
-    },
-  },
+<script setup>
+let showCode = $ref(false)
+let select = $ref({ province: '', city: '' })
+function selectProvince(value) {
+  select.province = value
+  console.log(value)
+}
+function selectCity(value) {
+  select.city = value
+  console.log(value)
 }
 </script>

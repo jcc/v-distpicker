@@ -11,8 +11,10 @@
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-right col-md-12" v-if="showCode">
-<pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+        <div v-if="showCode" class="box-right col-md-12">
+          <pre
+            class="language-javascript code-toolbar"
+          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -32,33 +34,24 @@
   </div>
 </template>
 
-<script>
-import VDistpicker from '../../../src/Distpicker'
+<script setup>
+import { reactive } from 'vue'
 
-export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      showCode: false,
-      select: { province: '', city: '', area: '' },
-    }
-  },
-  methods: {
-    onSelect (data) {
-      console.log(data)
-    },
-    selectProvince(value) {
-      this.select.province = value
-      console.log(value);
-    },
-    selectCity(value) {
-      this.select.city = value
-      console.log(value);
-    },
-    selectArea(value) {
-      this.select.area = value
-      console.log(value);
-    },
-  },
+let showCode = reactive(false)
+let select = reactive({ province: '', city: '', area: '' })
+function onSelect(data) {
+  console.log(data)
+}
+function selectProvince(value) {
+  select.province = value
+  console.log(value)
+}
+function selectCity(value) {
+  select.city = value
+  console.log(value)
+}
+function selectArea(value) {
+  select.area = value
+  console.log(value)
 }
 </script>

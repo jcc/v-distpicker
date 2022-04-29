@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import App from './App'
+import { createApp } from 'vue'
+import App from './App.vue'
 
-new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+const app = createApp(App)
+import VDistpicker from '@/Distpicker'
+app.component('VDistpicker', VDistpicker)
+
+app.mount('#app')

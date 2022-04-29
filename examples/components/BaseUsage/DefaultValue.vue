@@ -5,14 +5,23 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker :province="select.province" :city="select.city" :area="select.area" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker
+              :province="select.province"
+              :city="select.city"
+              :area="select.area"
+              @province="selectProvince"
+              @city="selectCity"
+              @area="selectArea"
+            ></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-right col-md-12" v-if="showCode">
-<pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+        <div v-if="showCode" class="box-right col-md-12">
+          <pre
+            class="language-javascript code-toolbar"
+          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker <span class="token punctuation">:</span>province<span class="token operator">=</span><span class="token string">"select.province"</span> <span class="token punctuation">:</span>city<span class="token operator">=</span><span class="token string">"select.city"</span> <span class="token punctuation">:</span>area<span class="token operator">=</span><span class="token string">"select.area"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -37,30 +46,19 @@
   </div>
 </template>
 
-<script>
-import VDistpicker from '../../../src/Distpicker'
-
-export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      showCode: false,
-      select: { province: 440000, city: '广州市', area: '海珠区' },
-    }
-  },
-  methods: {
-    selectProvince(value) {
-      this.select.province = value.value
-      console.log(value);
-    },
-    selectCity(value) {
-      this.select.city = value.value
-      console.log(value);
-    },
-    selectArea(value) {
-      this.select.area = value.value
-      console.log(value);
-    },
-  },
+<script setup>
+let showCode = $ref(false)
+let select = $ref({ province: 440000, city: '广州市', area: '海珠区' })
+function selectProvince(value) {
+  select.province = value.value
+  console.log(value)
+}
+function selectCity(value) {
+  select.city = value.value
+  console.log(value)
+}
+function selectArea(value) {
+  select.area = value.value
+  console.log(value)
 }
 </script>

@@ -10,13 +10,17 @@
       </div>
       <div class="block">
         <h5>Register global component</h5>
-          <pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">import</span> VDistpicker <span class="token keyword">from</span> <span class="token string">'v-distpicker'</span>
+        <pre
+          class="language-javascript code-toolbar"
+        ><code class=" language-javascript"><span class="token keyword">import</span> VDistpicker <span class="token keyword">from</span> <span class="token string">'v-distpicker'</span>
 
 Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'v-distpicker'</span><span class="token punctuation">,</span> VDistpicker<span class="token punctuation">)</span></code></pre>
       </div>
       <div class="block">
         <h5>Register component</h5>
-        <pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token keyword">import</span> VDistpicker <span class="token keyword">from</span> <span class="token string">'v-distpicker'</span>
+        <pre
+          class="language-javascript code-toolbar"
+        ><code class=" language-javascript"><span class="token keyword">import</span> VDistpicker <span class="token keyword">from</span> <span class="token string">'v-distpicker'</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   components<span class="token punctuation">:</span> <span class="token punctuation">{</span> VDistpicker <span class="token punctuation">}</span>

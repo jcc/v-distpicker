@@ -11,8 +11,10 @@
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-right col-md-12" v-if="showCode">
-<pre class=" language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+        <div v-if="showCode" class="box-right col-md-12">
+          <pre
+            class="language-javascript code-toolbar"
+          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker @selected<span class="token operator">=</span><span class="token string">"onSelected"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -38,34 +40,24 @@
   </div>
 </template>
 
-<script>
-import VDistpicker from '../../../src/Distpicker'
+<script setup>
+let showCode = $ref(false)
+let select = $ref({ province: '', city: '', area: '' })
 
-export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      showCode: false,
-      select: { province: '', city: '', area: '' },
-    }
-  },
-  methods: {
-    selectProvince(value) {
-      this.select.province = value
-      console.log(value);
-    },
-    selectCity(value) {
-      this.select.city = value
-      console.log(value);
-    },
-    selectArea(value) {
-      this.select.area = value
-      console.log(value);
-    },
-    onSelected(data) {
-      alert(data.province.value + ' | ' + data.city.value + ' | ' + data.area.value)
-      console.log(data)
-    },
-  },
+function selectProvince(value) {
+  select.province = value
+  console.log(value)
+}
+function selectCity(value) {
+  select.city = value
+  console.log(value)
+}
+function selectArea(value) {
+  select.area = value
+  console.log(value)
+}
+function onSelected(data) {
+  alert(data.province.value + ' | ' + data.city.value + ' | ' + data.area.value)
+  console.log(data)
 }
 </script>
