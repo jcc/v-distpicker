@@ -2,13 +2,21 @@
 <img src="https://pigjian.com/images/v-distpicker.png" alt="Powered By Jiajian Chan" width="160">
 </p>
 
-<p align="center">A flexible, highly available district selector for picking provinces, cities and districts of China.</p>
-
-<p align="center"> base on Vue3</p>
+<p align="center">A flexible, highly available district selector for picking provinces, cities and districts of China. </p>
 
 # V - Distpicker
 
-Here is [documents](http://distpicker.pigjian.com/)
+Here is [documents](/examples/components/Usage.vue)
+
+
+Vue 2
+
+-  1.x
+
+Vue 3
+
+-  2.x
+
 
 ## Installation
 
@@ -29,19 +37,29 @@ yarn add v-distpicker --save
 Registe global component:
 
 ```javascript
-import Distpicker from 'v-distpicker'
+import VDistpicker from 'v-distpicker'
+const app = createApp(App)
 
-Vue.component('v-distpicker', Distpicker)
+app.component('v-distpicker', VDistpicker)
+```
+
+Use  setup-api:
+
+```javascript
+<script setuo>
+import VDistpicker from 'v-distpicker'
+</script>
 ```
 
 Registe component:
 
 ```javascript
+import {defineComponent} from 'vue';
 import VDistpicker from 'v-distpicker'
 
-export default {
+export default defineComponent({
   components: { VDistpicker }
-}
+})
 ```
 
 **How to use**
@@ -66,7 +84,25 @@ Mobile:
 
 ## Contributors
 
-- [Jiajian Chan](http://github.com/jcc)
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/jcc"><img src="https://avatars.githubusercontent.com/u//12684082?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jcc</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/lyh2668"><img src="https://avatars.githubusercontent.com/u/8433634?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lyh2668</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/wwhwwhwwh"><img src="https://avatars.githubusercontent.com/u/17873876?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wwhwwhwwh</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kent666a"><img src="https://avatars.githubusercontent.com/u/8786136?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kent666a</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Milogenius"><img src="https://avatars.githubusercontent.com/u/28343096?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Milogenius</b></sub></a><br /></td>
+  </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/xu8117"><img src="https://avatars.githubusercontent.com/u//39123862?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xu8117</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tcsiye"><img src="https://avatars.githubusercontent.com/u/26521834?v=4?s=100" width="100px;" alt=""/><br /><sub><b>tcsiye</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/iyangsheng"><img src="https://avatars.githubusercontent.com/u/39045336?v=4?s=100" width="100px;" alt=""/><br /><sub><b>iyangsheng</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/liushuai05"><img src="https://avatars.githubusercontent.com/u/26994692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>liushuai05</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Aufree"><img src="https://avatars.githubusercontent.com/u/5310542?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aufree</b></sub></a><br /></td>
+  </tr>
+</table>
+
+
 
 ## Thanks
 

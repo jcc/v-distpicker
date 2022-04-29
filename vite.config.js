@@ -9,7 +9,7 @@ export default ({ mode }) => {
     plugins: [vue({
       reactivityTransform: true, 
     })],
-      root: __DEV__?resolve(__dirname, 'examples/'):process.cwd(),
+    root: __DEV__?resolve(__dirname, 'examples/'):process.cwd(),
     server: {
       port: 3000,
     },
@@ -26,7 +26,7 @@ export default ({ mode }) => {
       },
       lib: {
         entry: 'src/index.js',
-        name: 'v-distpicker',
+        name: 'VDistpicker',
         formats: ['umd'],
         fileName: () => 'v-distpicker.js'
       },
@@ -39,4 +39,3 @@ export default ({ mode }) => {
     },
   })
 }
-
