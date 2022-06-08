@@ -6,7 +6,7 @@
 
 # V - Distpicker
 
-Here is [documents](/examples/components/Usage.vue)
+Here is [ online documents](https://19hphh.sse.codesandbox.io/)
 
 
 Vue 2
