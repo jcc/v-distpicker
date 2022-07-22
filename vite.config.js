@@ -6,23 +6,25 @@ export default ({ mode }) => {
   const __DEV__ = mode === 'development'
   // reactivityTransform require vue@^3.2.25  https://vuejs.org/guide/extras/reactivity-transform.html#typescript-integration
   return  defineConfig({
-    plugins: [vue({
+    plugins: [
+      vue({
       reactivityTransform: true, 
-    })],
+      })
+    ],
     root: __DEV__?resolve(__dirname, 'examples/'):process.cwd(),
     server: {
       port: 3000,
     },
     build: {
       // https://cn.vitejs.dev/config/#build-csscodesplits
-       cssCodeSplit:true,
-      rollupOptions: {
-        external: ['vue'],
-        output: {
-          globals: {
-            vue: 'Vue',
-          },
+    cssCodeSplit:true,
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
         },
+      },
       },
       lib: {
         entry: 'src/index.js',

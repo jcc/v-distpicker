@@ -4,7 +4,6 @@
   "version": "2.0.0",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
-  "repository": "jcc/v-distpicker",
   "main": "dist/v-distpicker.js",
   "files": [
     "src",
@@ -32,6 +31,10 @@
   },
   "dependencies": {
     "vue": "^3.2.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcc/v-distpicker.git"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.0",
