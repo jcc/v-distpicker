@@ -106,6 +106,27 @@
               <td>address</td>
             </tr>
             <tr>
+              <td><strong>province-source</strong></td>
+              <td><strong>自定义省级数据</strong></td>
+              <td>Object</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>city-source</strong></td>
+              <td><strong>自定义市级数据</strong></td>
+              <td>Object</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>area-source</strong></td>
+              <td><strong>自定义区级数据</strong></td>
+              <td>Object</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
               <td><strong>address-header</strong></td>
               <td><strong>address-header 样式（选填，类型必须为 mobile）</strong></td>
               <td>String</td>

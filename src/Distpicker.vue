@@ -67,10 +67,11 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, onMounted, reactive, watch } from 'vue'
-
-import DISTRICTS from './districts'
-const DEFAULT_CODE = 100000
+import { onBeforeMount, reactive, watch } from 'vue'
+import { isChn,isEmpty } from './util'
+import DEFAULT_PROVINCE from './province'
+import DEFAULT_CITY from './city'
+import DEFAULT_AREA from './area'
 
 const emitEvent = defineEmits(['selected', 'province', 'city', 'area'])
 const props = defineProps({
@@ -91,12 +92,10 @@ const props = defineProps({
       }
     },
   },
-  districts: {
-    type: [Array, Object],
-    default() {
-      return DISTRICTS
-    },
-  },
+  provinceSource: Object,
+  citySource: Object,
+  areaSource: Object,
+
   disabled: { type: Boolean, default: false },
   provinceDisabled: { type: Boolean, default: false },
   cityDisabled: { type: Boolean, default: false },
@@ -105,6 +104,7 @@ const props = defineProps({
   addressContainer: { type: String, default: 'address-container' },
   wrapper: { type: String, default: 'distpicker-address-wrapper' },
 })
+
 
 let tab = $ref(1)
 let showCityTab = $ref(false)
@@ -115,40 +115,48 @@ let areas = $ref([])
 let currentProvince = $ref('')
 let currentCity = $ref('')
 let currentArea = $ref('')
+let provinceData = reactive({})
+let cityData = reactive({})
+let areaData = reactive({})
+ 
+
+  provinceData = props.provinceSource || DEFAULT_PROVINCE
+  cityData = props.citySource || DEFAULT_CITY
+  areaData = props.areaSource || DEFAULT_AREA
+  
 onBeforeMount(() => {
-  currentProvince = determineType(props.province)
-  currentCity = determineType(props.city)
-  currentArea = determineType(props.area)
+   currentProvince = getCodeValue(props.province, 'province')
+  currentCity = getCodeValue(props.city, 'city')
+  currentArea = getCodeValue(props.area, 'area')
+  
   if (props.type !== 'mobile') {
-    provinces = getDistricts()
-    cities = props.province ? getDistricts(getAreaCode(determineType(props.province))) : []
-    let directCity = isDirectCity(props.province, props.city)
-    areas = props.city
-      ? getDistricts(getAreaCode(determineType(props.city), directCity ? determineType(props.city) : props.area, 'city'))
-      : []
+     provinces = getProvinceList()
+     cities = getCityList(props.province)
+     areas = getAreaList(props.city)
   } else {
     if (props.area && !props.hideArea && !props.onlyProvince) {
       tab = 3
       showCityTab = true
       showAreaTab = true
-      let directCity = isDirectCity(props.province, props.city)
-      areas = getDistricts(getAreaCode(determineType(props.city), directCity ? determineType(props.city) : props.area, 'city'))
+      areas = getAreaList(props.city)
     } else if (props.city && props.hideArea && !props.onlyProvince) {
       tab = 2
       showCityTab = true
-      cities = getDistricts(getAreaCode(determineType(props.province)))
+      cities = getCityList(props.province)
     } else {
-      provinces = getDistricts()
+      provinces = getProvinceList()
     }
   }
 })
-onMounted(() => {})
+
+
 
 watch(
   () => currentProvince,
   (value) => {
-    emitEvent('province', setData(value, 'province'))
-    if (props.onlyProvince) {
+    let isPlaceholder = value == props.placeholders.province
+    emitEvent('province', setData(isPlaceholder?'':value, 'province'))
+    if (!isPlaceholder && props.onlyProvince) {
       emit('selected')
     }
   }
@@ -156,8 +164,9 @@ watch(
 watch(
   () => currentCity,
   (value) => {
-    emitEvent('city', setData(value, 'city', currentCity))
-    if (value != props.placeholders.city && props.hideArea) {
+   let isPlaceholder = value == props.placeholders.city
+    emitEvent('city', setData(isPlaceholder?'':value, 'city'))
+    if (!isPlaceholder && props.hideArea) {
       emit('selected')
     }
   }
@@ -165,73 +174,75 @@ watch(
 watch(
   () => currentArea,
   (value) => {
-    emitEvent('area', setData(value, 'area', currentArea, true))
-    if (value != props.placeholders.area) {
+   let isPlaceholder = value == props.placeholders.area
+    emitEvent('area', setData(isPlaceholder?'':value, 'area'))
+    if (!isPlaceholder) {
       emit('selected')
     }
   }
 )
+
 watch(
   () => props.province,
   () => {
-    currentProvince = props.province || props.placeholders.province
-    cities = determineValue('province', currentProvince, props.placeholders.province)
+      let val =props.province || props.placeholders.province
+      currentProvince =getCodeValue(val,'province')
+      cities = getCityList(currentProvince)
   }
 )
+
 watch(
   () => props.city,
   () => {
-    cities = determineValue('province', currentProvince, props.placeholders.province)
-    currentCity = props.city || props.placeholders.city
+    let city  = props.city || props.placeholders.city
+     currentCity = getCodeValue(city, 'city')
+      areas = getAreaList(city)
   }
 )
 watch(
   () => props.area,
   () => {
-    areas = determineValue('city', currentCity, props.placeholders.city, currentProvince)
-    currentArea = props.area || props.placeholders.area
+    let area = props.area || props.placeholders.area
+    currentArea = getCodeValue(area, 'area')
+
   }
 )
 
-function setData(value, type, check = '', isArea = false) {
+function setData(value, type,) { 
   let code
-  if (isArea) {
-    code = getCodeByArea(value)
-  } else {
-    code = getAreaCode(value, check, type)
+  if (!isEmpty(value)) { 
+      switch (type) {
+      case 'area':
+        code = getAreaVal(value,true,areas)
+        break
+      case 'city':
+        code =getCityVal(value,true, cities)
+        break
+      case 'province':
+        code = getProvinceVal(value,true)
+        break
+    }
   }
-  return {
-    code: code,
-    value: value,
-  }
+  return { code, value}
 }
-function getCodeByArea(value) {
-  let areas_map = {}
-  let arr_keys = Object.keys(areas)
-  for (let i = 0; i < arr_keys.length; i++) {
-    let arr_key = arr_keys[i]
-    let arr_value = areas[arr_key]
-    areas_map[arr_value] = arr_key
-  }
-  return areas_map[value]
-}
+
 function emit(name) {
   let data = reactive({
     province: setData(currentProvince, 'province'),
   })
 
   if (!props.onlyProvince) {
-    data.city = setData(currentCity, 'city', currentProvince)
+    data.city = setData(currentCity, 'city')
   }
   if (!props.onlyProvince || props.hideArea) {
-    data.area = setData(currentArea, 'area', currentProvince, true)
+    data.area = setData(currentArea, 'area')
   }
   emitEvent(name, data)
 }
 function getCities() {
   currentCity = props.placeholders.city
   currentArea = props.placeholders.area
-  cities = determineValue('province', currentProvince, props.placeholders.province)
+  cities =getCityList(currentProvince)
   cleanList()
   if (cities.length === 0) {
     emit('selected')
@@ -241,7 +252,7 @@ function getCities() {
 }
 function getAreas() {
   currentArea = props.placeholders.area
-  areas = determineValue('city', currentCity, props.placeholders.city, currentProvince)
+  areas =  getAreaList(currentCity)
   if (areas.length === 0) {
     emit('selected')
     tab = 2
@@ -250,7 +261,7 @@ function getAreas() {
 }
 function resetProvince() {
   tab = 1
-  provinces = getDistricts()
+  provinces = getProvinceList()
   showCityTab = false
   showAreaTab = false
 }
@@ -279,89 +290,114 @@ function chooseCity(name) {
 function chooseArea(name) {
   currentArea = name
 }
-function getAreaCodeByPreCode(name, preCode) {
-  let codes = []
-  for (let x in props.districts) {
-    for (let y in props.districts[x]) {
-      if (name === props.districts[x][y]) {
-        codes.push(y)
-      }
-    }
-  }
 
-  if (codes.length > 1) {
-    let index
-    codes.forEach((item, i) => {
-      if ((preCode.length === 2 && item.slice(0, 2) === preCode) || (preCode.length === 4 && item.slice(0, 4) !== preCode)) {
-        index = i
-      }
-    })
-
-    return codes[index]
-  } else {
-    return codes[0]
-  }
-}
-function getAreaCode(name, check = '', type = '') {
-  for (let x in props.districts) {
-    for (let y in props.districts[x]) {
-      if (name === props.districts[x][y]) {
-        if (check.length > 0) {
-          let code = y
-
-          if (check) {
-            let preCode = type === 'city' ? getAreaCode(currentProvince).slice(0, 2) : y.slice(0, 2)
-
-            code = getAreaCodeByPreCode(name, preCode)
-          }
-
-          if (!code || y.slice(0, 2) !== code.slice(0, 2)) {
-            continue
-          } else {
-            return code
-          }
-        } else {
-          return y
-        }
-      }
-    }
-  }
-}
-function getCodeValue(code) {
-  for (let x in props.districts) {
-    for (let y in props.districts[x]) {
-      if (code === parseInt(y)) {
-        return props.districts[x][y]
-      }
-    }
-  }
-}
-function getDistricts(code = DEFAULT_CODE) {
-  return props.districts[code] || []
-}
-function determineValue(type, currentValue, placeholderValue, check = '') {
-  if (currentValue === placeholderValue) {
-    return []
-  } else {
-    return getDistricts(getAreaCode(currentValue, check, type))
-  }
-}
-function determineType(value) {
-  if (typeof value === 'number') {
-    return getCodeValue(value)
-  }
-
-  return value
-}
 function cleanList() {
   areas = []
 }
-function isDirectCity(province, city) {
-  if (province && city) {
-    return determineType(props.province) === determineType(props.city)
-  }
-  return false
+
+
+/**
+ * 根据名称 或 编码 ,返回下拉框选项
+ * 名称转换为编码查找
+ *@param codeOrName 名称 或 编码 
+ * 
+ */
+function getCityList(codeOrName) {
+   let code  = isChn(codeOrName)?getProvinceVal(codeOrName,true):codeOrName
+   return  cityData[code] || []
 }
+
+function getAreaList(codeOrName) { 
+  let code = isChn(codeOrName) ? getCityVal(codeOrName,true) : codeOrName
+  return areaData[code]||[]
+}
+
+function getProvinceList() { 
+  return provinceData
+}
+
+function getTransformData(val,itemCode,data,isName) { 
+  if (isName) {
+        if (data[itemCode] == val)  return itemCode
+      } else { 
+        if (itemCode == val) return data[itemCode]
+  }
+  return null
+}
+ 
+
+/**
+ * 查找
+ * @param proviceVal 值
+ * @param data 数据源,默认从所有数据查找
+ * @param isName false 传入编码 返回 名称，true 传入名称 返回 编码
+ */
+function getCityVal(cityVal,isName=false, data=null,) { 
+    if (data) {
+      for (let itemCode in data) {
+        let val = getTransformData(cityVal, itemCode, data,isName)
+        if(val) return val
+      }
+    } else { 
+      for (let item of Object.values(cityData)) { 
+        for (let itemCode in item) {
+          let val = getTransformData(cityVal, itemCode, item,isName)
+          if (val) return val
+        }
+      }
+    }
+    return cityVal
+}
+
+function getProvinceVal(proviceVal,isName=false) {
+    for (let itemCode in provinceData) {
+      let val = getTransformData(proviceVal, itemCode, provinceData,isName)
+       if(val) return val
+    }
+    return proviceVal
+}
+
+function getAreaVal(areaVal,isName=false,data=null,) { 
+    if (data) {
+      for (let itemCode in data) {
+        let val = getTransformData(areaVal, itemCode, data,isName)
+        if (val) return val
+      }
+    } else { 
+      for (let item of Object.values(areaData)) { 
+        for (let itemCode in item) {
+          let val = getTransformData(areaVal, itemCode, item,isName)
+          if (val) return val
+          }
+        }
+    }
+  return areaVal
+}
+
+/**
+ * 根据 编码，返回 名称
+ */
+function getCodeValue(codeOrName, type, isName = false) {
+  if (isEmpty(codeOrName)) return ''
+   let name = codeOrName
+  if (codeOrName && !isChn(codeOrName)) {
+    switch (type) {
+      case 'area':
+        name = getAreaVal(codeOrName, isName)
+        break
+      case 'city':
+        name = getCityVal(codeOrName, isName)
+        break
+      case 'province':
+        name = getProvinceVal(codeOrName, isName)
+        break
+    }
+    return name
+  }
+  return name
+}
+
+
 </script>
 
 <style lang="scss">
