@@ -1,3 +1,3 @@
-import VDistpicker from './Distpicker'
+import VDistpicker from './Distpicker.vue'
 
 export default VDistpicker
