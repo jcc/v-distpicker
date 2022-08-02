@@ -8,10 +8,11 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [
       vue({
+        isProduction: __DEV__,
         reactivityTransform: true,
       }),
     ],
-    root: process.cwd(),
+    root: __DEV__ ? resolve(__dirname, 'examples/') : process.cwd(),
     server: {
       port: 3000,
     },
@@ -36,7 +37,7 @@ export default ({ mode }) => {
     resolve: {
       extensions: ['.js', '.json', '.vue'],
       alias: {
-        '@': resolve(__dirname, '../src'),
+        '@': resolve(__dirname, './src'),
       },
     },
   })
