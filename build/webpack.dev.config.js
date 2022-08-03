@@ -1,55 +1,58 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+
+const isProd = process.env.NODE_ENV === "production";
+
+const config = {
+  root: path.join(__dirname, "./"),
+};
+
+console.log();
 
 module.exports = {
-  entry: './examples/main.js',
+  entry: "./examples/main.js",
+  mode: "development",
   resolve: {
-    extensions: ['*', '.js', '.vue'],
-    alias: {
-      main: path.resolve(__dirname, '../src')
-    },
+    extensions: [".js", ".json", ".vue"],
   },
   output: {
-    path: path.resolve(__dirname, '../dist/dev'),
-    publicPath: '/',
-    filename: 'v-distpicker.js'
+    path: path.join(config.root, "../dist"),
+    filename: "v-distpicker.js",
   },
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist/dev'),
+    static: path.resolve(__dirname, "../examples"),
     compress: false,
-    port: 8080
+    port: 3000,
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, '../dist/dev/index.html'),
-      template: 'examples/index.html',
-      inject: true
-    })
+      filename: "index.html",
+      template: path.join(config.root, "../examples/template.html"),
+      inject: true,
+    }),
   ],
   module: {
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        loaders: {
-          scss: 'vue-style-loader!css-loader!sass-loader',
-          sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-        }
-      }
-    }, {
-      test: /\.js$/,
-      loaders: ['babel-loader', 'eslint-loader'],
-      exclude: /node_modules/
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 10000,
-        name: 'img/[name].[hash:7].[ext]'
-      }
-    }]
-  }
-}
+    rules: [
+      {
+        test: /\.vue$/,
+        use: "vue-loader",
+      },
+      {
+        test: /\.js$/,
+        use: ["babel-loader"],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.scss$/,
+        use: ["vue-style-loader", "css-loader", "sass-loader"],
+      },
+    ],
+  },
+};

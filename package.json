@@ -1,10 +1,9 @@
 {
   "name": "v-distpicker",
   "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
-  "version": "0.1.7",
+  "version": "1.2.13",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
-  "repository": "jcc/v-distpicker",
   "main": "dist/v-distpicker.js",
   "files": [
     "src",
@@ -26,35 +25,39 @@
     "component"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --config=./build/webpack.dev.config.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=./build/webpack.prod.config.js"
+    "dev": "webpack server  --hot --config=./build/webpack.dev.config.js ",
+    "build": "webpack   --config=./build/webpack.prod.config.js"
   },
   "dependencies": {
-    "vue": "^2.2.2"
+    "vue": "^2.7.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcc/v-distpicker.git"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.14.0",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-stage-2": "^6.13.0",
-    "babel-runtime": "^6.11.6",
-    "cross-env": "^3.1.4",
-    "css-loader": "^0.23.0",
-    "eslint": "^3.12.2",
-    "eslint-loader": "^1.6.1",
-    "html-webpack-plugin": "^2.28.0",
-    "node-sass": "^4.5.0",
-    "sass-loader": "^6.0.3",
-    "file-loader": "^0.10.1",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "vue-loader": "^10.3.0",
-    "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.1.10",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
-  }
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/runtime-corejs3": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.21.0",
+    "eslint-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.2.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^3.3.1",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

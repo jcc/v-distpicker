@@ -164,12 +164,14 @@ a.nav-link:hover {
   margin-top: 60px !important;
 }
 
+ 
 .reset {
-  background-color: #ABD3B4;
   margin-top: 10px;
   margin-bottom: 10px;
   border: none;
 }
-.reset:hover {
-  background-color: #a3c9ab;
+ 
+.example-btn{
+  margin: 5px;
+  border: none;
 }

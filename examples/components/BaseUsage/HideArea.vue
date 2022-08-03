@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import VDistpicker from '../../../src/Distpicker'
+
 
 export default {
-  components: { VDistpicker },
+  
   data() {
     return {
       showCode: false,

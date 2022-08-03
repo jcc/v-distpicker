@@ -8,6 +8,8 @@
     <only-province></only-province>
     <trigger-event></trigger-event>
     <reset-button></reset-button>
+    <disabled></disabled>
+     <data-source></data-source>
   </div>
 </template>
 
@@ -19,9 +21,11 @@ import HideArea from './HideArea'
 import OnlyProvince from './OnlyProvince'
 import TriggerEvent from './TriggerEvent'
 import ResetButton from './ResetButton'
-
+import Disabled from "./Disabled";
+import DataSource  from './DataSource'
 export default {
   components: {
+	  Disabled,
     Basic,
     Placeholders,
     DefaultValue,
@@ -29,6 +33,7 @@ export default {
     OnlyProvince,
     TriggerEvent,
     ResetButton,
+    DataSource
   },
 }
 </script>

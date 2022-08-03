@@ -43,6 +43,34 @@
               <td>null</td>
             </tr>
             <tr>
+              <td><strong>disabled</strong></td>
+              <td><strong>是否禁用（选填，默认 false，且 type='mobile' 时无效，当disabled=true时province-disabled、city-disabled、area-disabled均无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>province-disabled</strong></td>
+              <td><strong>是否禁用省（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>city-disabled</strong></td>
+              <td><strong>是否禁用市（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td><strong>area-disabled</strong></td>
+              <td><strong>是否禁用区、县（选填，默认 false，且 type='mobile' 时无效）</strong></td>
+              <td>Boolean</td>
+              <td>true, false</td>
+              <td>false</td>
+            </tr>
+            <tr>
               <td><strong>hide-area</strong></td>
               <td><strong>隐藏地区（选填）</strong></td>
               <td>Boolean</td>
@@ -50,7 +78,7 @@
               <td>false</td>
             </tr>
             <tr>
-              <td><strong>onlu-province</strong></td>
+              <td><strong>only-province</strong></td>
               <td><strong>只显示省份（选填）</strong></td>
               <td>Boolean</td>
               <td>true, false</td>
@@ -76,6 +104,27 @@
               <td>String</td>
               <td>customize</td>
               <td>address</td>
+            </tr>
+            <tr>
+              <td><strong>province-source</strong></td>
+              <td><strong>自定义省级数据</strong></td>
+              <td>Object</td>
+              <td>参考 examples/components/data</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>city-source</strong></td>
+              <td><strong>自定义市级数据</strong></td>
+              <td>Object</td>
+              <td>参考 examples/components/data</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>area-source</strong></td>
+              <td><strong>自定义区级数据</strong></td>
+              <td>Object</td>
+              <td>参考 examples/components/data</td>
+              <td></td>
             </tr>
             <tr>
               <td><strong>address-header</strong></td>

@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker type="mobile" wrapper="address-wrapper" :province="select.province" :city="select.city" :area="select.area" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker type="mobile" :province="select.province" :city="select.city" :area="select.area" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import VDistpicker from '../../../src/Distpicker'
+
 
 export default {
-  components: { VDistpicker },
+  
   data() {
     return {
       showCode: false,
@@ -45,15 +45,15 @@ export default {
   },
   methods: {
     selectProvince(value) {
-      this.select.province = value
+      this.select.province = value.value
       console.log(value);
     },
     selectCity(value) {
-      this.select.city = value
+      this.select.city = value.value
       console.log(value);
     },
     selectArea(value) {
-      this.select.area = value
+      this.select.area = value.value
       console.log(value);
     },
   },

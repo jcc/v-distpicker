@@ -6,7 +6,9 @@
 
 # V - Distpicker
 
-Here is [documents](http://distpicker.iline.co/)
+[Documents and  Demo ](https://19hphh.sse.codesandbox.io/)
+
+ [English](./README.md) | [简体中文](./README-zh_CN.md)
 
 ## Installation
 
@@ -64,7 +66,25 @@ Mobile:
 
 ## Contributors
 
-- [Jiajian Chan](http://github.com/jcc)
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/jcc"><img src="https://avatars.githubusercontent.com/u//12684082?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jcc</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/lyh2668"><img src="https://avatars.githubusercontent.com/u/8433634?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lyh2668</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/wwhwwhwwh"><img src="https://avatars.githubusercontent.com/u/17873876?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wwhwwhwwh</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kent666a"><img src="https://avatars.githubusercontent.com/u/8786136?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kent666a</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Milogenius"><img src="https://avatars.githubusercontent.com/u/28343096?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Milogenius</b></sub></a><br /></td>
+  </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/xu8117"><img src="https://avatars.githubusercontent.com/u//39123862?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xu8117</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tcsiye"><img src="https://avatars.githubusercontent.com/u/26521834?v=4?s=100" width="100px;" alt=""/><br /><sub><b>tcsiye</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/iyangsheng"><img src="https://avatars.githubusercontent.com/u/39045336?v=4?s=100" width="100px;" alt=""/><br /><sub><b>iyangsheng</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/liushuai05"><img src="https://avatars.githubusercontent.com/u/26994692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>liushuai05</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Aufree"><img src="https://avatars.githubusercontent.com/u/5310542?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aufree</b></sub></a><br /></td>
+  </tr>
+</table>
+
+
 
 ## Thanks
 

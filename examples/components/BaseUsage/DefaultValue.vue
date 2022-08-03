@@ -38,27 +38,27 @@
 </template>
 
 <script>
-import VDistpicker from '../../../src/Distpicker'
+
 
 export default {
-  components: { VDistpicker },
+  
   data() {
     return {
       showCode: false,
-      select: { province: '广东省', city: '广州市', area: '海珠区' },
+      select: { province: 440000, city: '广州市', area: '海珠区' },
     }
   },
   methods: {
     selectProvince(value) {
-      this.select.province = value
+      this.select.province = value.value
       console.log(value);
     },
     selectCity(value) {
-      this.select.city = value
+      this.select.city = value.value
       console.log(value);
     },
     selectArea(value) {
-      this.select.area = value
+      this.select.area = value.value
       console.log(value);
     },
   },
