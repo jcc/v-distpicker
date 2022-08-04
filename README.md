@@ -6,7 +6,9 @@
 
 # V - Distpicker
 
-Here is [ online documents](https://19hphh.sse.codesandbox.io/)
+[Documents and  Demo ](https://19hphh.sse.codesandbox.io/)
+
+ [English] | [简体中文](./README.zh_CN.md)
 
 
 Vue 2
@@ -46,7 +48,7 @@ app.component('v-distpicker', VDistpicker)
 Use  setup-api:
 
 ```javascript
-<script setuo>
+<script setup>
 import VDistpicker from 'v-distpicker'
 </script>
 ```
