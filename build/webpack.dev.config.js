@@ -9,14 +9,13 @@ const config = {
   root: path.join(__dirname, "./"),
 };
 
-console.log();
-
 module.exports = {
   entry: "./examples/main.js",
   mode: "development",
   resolve: {
     extensions: [".js", ".json", ".vue"],
   },
+  devtool: "cheap-module-source-map",
   output: {
     path: path.join(config.root, "../dist"),
     filename: "v-distpicker.js",
