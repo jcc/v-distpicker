@@ -23,7 +23,7 @@
 `2022-08-04`
 
 -  增加 change,change-province,change-city,change-area 事件监听 (值发生变化就触发，包含手动选择和程序设置)
--  重构原select 事件(手动选择才触发)
+-  重构原select 事件(手动选择才触发) [#106](https://github.com/jcc/v-distpicker/issues/106)
 -  完善相关文档
 
 
