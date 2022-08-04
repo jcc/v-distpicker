@@ -85,7 +85,8 @@
 </template>
 
 <script>
-import { isChn,isEmpty } from './util'
+import { isChn, isEmpty, isDistCode } from './util'
+import { autoCompleteDistCode, completeDistCode } from './transform'
 import DEFAULT_PROVINCE from './province'
 import DEFAULT_CITY from './city'
 import DEFAULT_AREA from './area'
@@ -140,22 +141,38 @@ export default {
   },
   created() {
     this.provinceData = this.provinceSource || DEFAULT_PROVINCE
-   this.cityData = this.citySource || DEFAULT_CITY
-   this.areaData = this.areaSource || DEFAULT_AREA
-    this.currentProvince =this. getCodeValue(this.province, 'province')
-    this.currentCity = this.getCodeValue(this.city, 'city')
+    this.cityData = this.citySource || DEFAULT_CITY
+    this.areaData = this.areaSource || DEFAULT_AREA
+
+    let provinceVal = this.province
+    let cityVal =this.city 
+     
+    if (isDistCode(this.area)) {
+       let { provinceCode,cityCode} = autoCompleteDistCode(this.area, 'area')
+        this.currentProvince =this.getProvinceVal(provinceCode,false)
+        provinceVal=provinceCode
+        this.currentCity = this.getCityVal(cityCode, false)
+        cityVal=cityCode
+    }
+    
     this.currentArea = this.getCodeValue(this.area, 'area')
+    if (isEmpty(this.currentProvince)) { 
+       this.currentProvince =this.getCodeValue(provinceVal, 'province')
+    }
+    if (isEmpty(this.currentCity)) { 
+        this.currentCity = this.getCodeValue(cityVal, 'city')
+    }
     if (this.type !== 'mobile') {
        this.provinces =this. getProvinceList()
-     this.cities =this. getCityList(this.province)
-      this.areas =this. getAreaList(this.city)
+      this.cities =this.getCityList(provinceVal)
+      this.areas =this. getAreaList(cityVal)
     } else {
       if (this.area && !this.hideArea && !this.onlyProvince) {
         this.tab = 3
         this.showCityTab = true
         this.showAreaTab = true
-         this.areas =this. getAreaList(this.city)
-      } else if (this.city && this.hideArea && !this.onlyProvince) {
+         this.areas =this. getAreaList(cityVal)
+      } else if (cityVal && this.hideArea && !this.onlyProvince) {
         this.tab = 2
         this.showCityTab = true
         this.cities =this.getCityList(this.province)
@@ -168,23 +185,22 @@ export default {
     currentProvince(value) {
       let isPlaceholder = value == this.placeholders.province
       this.$emit('province', this.setData(isPlaceholder?'':value, 'province'))
-      if (!isPlaceholder &&this.onlyProvince) {
+      if (this.onlyProvince) {
         this.emit('selected')
       }
     },
     currentCity(value) {
       let isPlaceholder = value == this.placeholders.city
-      this.$emit('city', this.setData(isPlaceholder?'':value, 'city', this.currentProvince))
-      if (!isPlaceholder  && this.hideArea) {
+      this.$emit('city', this.setData(isPlaceholder?'':value, 'city'))
+      if ( this.hideArea) {
         this.emit('selected')
       }
     },
     currentArea(value) {
-       let isPlaceholder = value == this.placeholders.area
-      this.$emit('area', this.setData(isPlaceholder?'':value, 'area', this.currentProvince))
-      if (!isPlaceholder) {
-        this.emit('selected')
-      }
+      let isPlaceholder = value == this.placeholders.city
+      this.$emit('area', this.setData(isPlaceholder?'':value, 'area'))
+      this.emit('selected')
+      
     },
     province(value) {
       let val = this.province || this.placeholders.province
@@ -194,16 +210,19 @@ export default {
     city(value) {
       let city = this.city || this.placeholders.city
       this.currentCity = this.getCodeValue(city, 'city')
-      this. areas =this. getAreaList(city)  
+      this.areas =this. getAreaList(city)  
     },
     area(value) {
       let area = this.area || this.placeholders.area
+      if (isDistCode(area)) { 
+        this.changeAreaCode(area)
+      }
       this.currentArea =this.getCodeValue(area, 'area')
     },
   },
   methods: {
     setData(value, type) {
-      let code
+      let code=''
     if (!isEmpty(value)) { 
         switch (type) {
         case 'area':
@@ -213,21 +232,25 @@ export default {
           code =this.getCityVal(value,true, this.cities)
           break
         case 'province':
-          code =this. getProvinceVal(value,true)
+          code =this.getProvinceVal(value,true)
           break
       }
     }
      return { code, value}
     },
     emit(name) {
+
+      let provincePlaceholder = this.currentProvince==this.placeholders.province
       let data = {
-        province: this.setData(this.currentProvince, 'province')
+        province: this.setData(provincePlaceholder?'':this.currentProvince, 'province')
       }
       if (!this.onlyProvince) {
-        this.$set(data, 'city', this.setData(this.currentCity, 'city'))
+        let cityPlaceholder = this.currentCity==this.placeholders.city
+        this.$set(data, 'city', this.setData(cityPlaceholder?'':this.currentCity, 'city'))
       }
       if (!this.onlyProvince || this.hideArea) {
-        this.$set(data, 'area', this.setData(this.currentArea, 'area'))
+        let areaPlaceholder = this.currentArea==this.placeholders.area
+        this.$set(data, 'area', this.setData(areaPlaceholder?'':this.currentArea, 'area'))
       }
       this.$emit(name, data)
     },
@@ -285,7 +308,14 @@ export default {
      cleanList() {
       this.areas=[]
     },
-
+ 
+    changeAreaCode(areaCode) { 
+      let { provinceCode, cityCode } = autoCompleteDistCode(areaCode, 'area')
+      this.currentProvince = this.getProvinceVal(provinceCode, false)
+      this.currentCity = this.getCityVal(cityCode, false)
+      this.cities = this.getCityList(provinceCode)
+      this.areas = this.getAreaList(cityCode)
+    },
 /**
  * 根据名称 或 编码 ,返回下拉框选项
  * 名称转换为编码查找
@@ -318,18 +348,19 @@ export default {
 
 /**
  * 查找
- * @param proviceVal 值
+ * @param provinceVal 值
  * @param data 数据源,默认从所有数据查找
  * @param isName false 传入编码 返回 名称，true 传入名称 返回 编码
  */
- getCityVal(cityVal,isName=false, data=null,) { 
-    if (data) {
+ getCityVal(cityVal,isName=false, data) { 
+   if (data) {
       for (let itemCode in data) {
         let val =this.getTransformData(cityVal, itemCode, data,isName)
         if(val) return val
       }
     } else { 
-      for (let item of Object.values(this.cityData)) { 
+      let cityArr = Object.values(this.cityData)
+      for (let item of cityArr) { 
         for (let itemCode in item) {
           let val =this.getTransformData(cityVal, itemCode, item,isName)
           if (val) return val
@@ -339,22 +370,23 @@ export default {
     return cityVal
 },
 
- getProvinceVal(proviceVal,isName=false) {
+ getProvinceVal(provinceVal,isName=false) {
     for (let itemCode in this.provinceData) {
-      let val =this. getTransformData(proviceVal, itemCode, this.provinceData,isName)
+      let val =this. getTransformData(provinceVal, itemCode, this.provinceData,isName)
        if(val) return val
     }
-    return proviceVal
+    return provinceVal
 },
 
- getAreaVal(areaVal,isName=false,data=null,) { 
+ getAreaVal(areaVal,isName=false,data) { 
     if (data) {
       for (let itemCode in data) {
         let val =this.getTransformData(areaVal, itemCode, data,isName)
         if (val) return val
       }
     } else { 
-      for (let item of Object.values(this.areaData)) { 
+      let areaArr = Object.values(this.areaData)
+      for (let item of areaArr) { 
         for (let itemCode in item) {
           let val = this.getTransformData(areaVal, itemCode, item,isName)
           if (val) return val
@@ -385,8 +417,9 @@ export default {
     return name
   }
   return name
-}
-  }
+ },
+ 
+ }
 }
 </script>
 
