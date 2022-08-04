@@ -17,7 +17,7 @@
  
 ### 使用
 
- Vue 2  安装1.x 版本
+#### Vue 2  安装1.x 版本
 
 ```shell
  npm install v-distpicker@^1.3.0 --save
@@ -63,7 +63,7 @@ export default {
 ```
 
 
- Vue 3  安装2.x 版本
+#### Vue 3  安装2.x 版本
 
 ```shell
  npm install v-distpicker@^2.0.6 --save
@@ -117,15 +117,24 @@ Vue 3 --->> 提交到  master 分支
 
 
 
+### 待办事项
+
+- [ ] 2.x 增加 change 事件 （可参考1.x）
+- [ ] 2.x  OnlyCodeArea，仅设置区级 code ，自动推导省市 （可参考1.x）
+
+
 
 
 
 ### 问题
 
 *   省市区数据缺失了怎么办 ？
-  1.校验数据源中是否存在。
-  2.可以通过props 自定义数据源 
-  3.确实缺少的，欢迎 fork 和 PR 
+
+1.校验数据源中是否存在。
+  
+2.可以通过props 自定义数据源 
+
+3.确实缺少的，欢迎 fork 和 PR 
 
 <br>
 
