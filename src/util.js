@@ -8,6 +8,9 @@ function isEmpty(value) {
   }
   if (toString(value) == 'string') {
     value = value.replace(/\s+/g, '')
+    if (value.length == 0) {
+      return true
+    }
   }
   return false
 }

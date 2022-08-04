@@ -332,7 +332,7 @@ function getTransformData(val,itemCode,data,isName) {
  * @param data 数据源,默认从所有数据查找
  * @param isName false 传入编码 返回 名称，true 传入名称 返回 编码
  */
-function getCityVal(cityVal,isName=false, data=null,) { 
+function getCityVal(cityVal,isName=false, data=null) { 
     if (data) {
       for (let itemCode in data) {
         let val = getTransformData(cityVal, itemCode, data,isName)
@@ -357,7 +357,7 @@ function getProvinceVal(proviceVal,isName=false) {
     return proviceVal
 }
 
-function getAreaVal(areaVal,isName=false,data=null,) { 
+function getAreaVal(areaVal,isName=false,data=null) { 
     if (data) {
       for (let itemCode in data) {
         let val = getTransformData(areaVal, itemCode, data,isName)
