@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker @province="selectProvince" only-province></v-distpicker>
+            <v-distpicker @province="selectProvince" @selected="onSelect" only-province></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -44,6 +44,9 @@ export default {
     }
   },
   methods: {
+    onSelect (data) {
+      console.log(data)
+    },
     selectProvince(value) {
       this.select.province = value
       console.log(value);

@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker   :area="select.area" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea" ></v-distpicker>
+            <v-distpicker @change="onChange" @change-province="changeProvince"  @change-city="changeCity" @change-area="changeArea"  :area="select.area" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea" ></v-distpicker>
              <button class="btn btn-primary btn-sm example-btn" @click="changeSetCode">setByCode</button>
           </div>
           <div class="content-show col-md-5">
@@ -30,6 +30,18 @@ export default {
     }
   },
   methods: {
+    onChange({province,city, area}) { 
+       console.log('change',{province,city, area})
+    },
+    changeProvince({code,value }) { 
+       console.log('change-province',{code,value })
+    },
+    changeCity({code,value }) { 
+       console.log('change-city',{code,value })
+    },
+     changeArea({code,value }) { 
+       console.log('change-area',{code,value })
+    },
     onSelect({ province, city, area }) {
       this.select.area = area.code
       console.log('select',{province,city, area})

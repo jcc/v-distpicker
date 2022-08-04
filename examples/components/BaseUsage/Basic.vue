@@ -5,7 +5,10 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker @selected="onSelect"  @change="onChange" @change-province="changeProvince"
+            @change-city="changeCity" @change-area="changeArea"
+             @province="selectProvince" @city="selectCity" @area="selectArea"
+             ></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -44,20 +47,32 @@ export default {
     }
   },
   methods: {
+    onChange({province,city, area}) { 
+       console.log('change',{province,city, area})
+    },
+    changeProvince({code,value }) { 
+       console.log('change-province',{code,value })
+    },
+    changeCity({code,value }) { 
+       console.log('change-city',{code,value })
+    },
+     changeArea({code,value }) { 
+       console.log('change-area',{code,value })
+    },
     onSelect (data) {
       console.log(data)
     },
     selectProvince(value) {
       this.select.province = value
-      console.log(value);
+      console.log('select',value);
     },
     selectCity(value) {
       this.select.city = value
-      console.log(value);
+      console.log('select',value);
     },
     selectArea(value) {
       this.select.area = value
-      console.log(value);
+      console.log('select',value);
     },
   },
 }

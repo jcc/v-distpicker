@@ -31,7 +31,7 @@
           </select>
         </label>
         <label>
-          <select v-if="!hideArea" v-model="currentArea" :disabled="disabled || areaDisabled">
+          <select v-if="!hideArea" @change="changeArea" v-model="currentArea" :disabled="disabled || areaDisabled">
             <option :value="placeholders.area">{{ placeholders.area }}</option>
             <option v-for="(item, index) in areas "
                     :value="item"
@@ -44,7 +44,7 @@
     </template>
     <template v-else>
       <div :class="addressHeader">
-        <ul>
+        <ul >
           <li :class="{'active': tab === 1}" @click="resetProvince">{{ currentProvince && !staticPlaceholder ? currentProvince : placeholders.province }}</li>
           <template v-if="!onlyProvince">
             <li v-if="showCityTab" :class="{'active': tab === 2}" @click="resetCity">{{  currentCity && !staticPlaceholder ? currentCity : placeholders.city }}</li>
@@ -145,22 +145,21 @@ export default {
     this.areaData = this.areaSource || DEFAULT_AREA
 
     let provinceVal = this.province
-    let cityVal =this.city 
-     
+    let cityVal = this.city 
     if (isDistCode(this.area)) {
        let { provinceCode,cityCode} = autoCompleteDistCode(this.area, 'area')
-        this.currentProvince =this.getProvinceVal(provinceCode,false)
+        this.currentProvince =this.getProvinceVal(provinceCode,false)||this.placeholders.province
         provinceVal=provinceCode
-        this.currentCity = this.getCityVal(cityCode, false)
+        this.currentCity = this.getCityVal(cityCode, false)||this.placeholders.city
         cityVal=cityCode
     }
     
-    this.currentArea = this.getCodeValue(this.area, 'area')
+    this.currentArea = this.getCodeValue(this.area, 'area')||this.placeholders.area
     if (isEmpty(this.currentProvince)) { 
-       this.currentProvince =this.getCodeValue(provinceVal, 'province')
+       this.currentProvince =this.getCodeValue(provinceVal, 'province')||this.placeholders.province
     }
     if (isEmpty(this.currentCity)) { 
-        this.currentCity = this.getCodeValue(cityVal, 'city')
+        this.currentCity = this.getCodeValue(cityVal, 'city')||this.placeholders.city
     }
     if (this.type !== 'mobile') {
        this.provinces =this. getProvinceList()
@@ -183,24 +182,20 @@ export default {
   },
   watch: {
     currentProvince(value) {
-      let isPlaceholder = value == this.placeholders.province
-      this.$emit('province', this.setData(isPlaceholder?'':value, 'province'))
+      this.$emit('change-province', this.setData(value, 'province'))
       if (this.onlyProvince) {
-        this.emit('selected')
+         this.emit('change')
       }
     },
     currentCity(value) {
-      let isPlaceholder = value == this.placeholders.city
-      this.$emit('city', this.setData(isPlaceholder?'':value, 'city'))
-      if ( this.hideArea) {
-        this.emit('selected')
+      this.$emit('change-city', this.setData(value, 'city'))
+      if (this.hideArea) {
+          this.emit('change')
       }
     },
     currentArea(value) {
-      let isPlaceholder = value == this.placeholders.city
-      this.$emit('area', this.setData(isPlaceholder?'':value, 'area'))
-      this.emit('selected')
-      
+      this.$emit('change-area', this.setData(value, 'area'))
+      this.emit('change')
     },
     province(value) {
       let val = this.province || this.placeholders.province
@@ -210,7 +205,7 @@ export default {
     city(value) {
       let city = this.city || this.placeholders.city
       this.currentCity = this.getCodeValue(city, 'city')
-      this.areas =this. getAreaList(city)  
+      this.areas =this.getAreaList(city)  
     },
     area(value) {
       let area = this.area || this.placeholders.area
@@ -222,45 +217,51 @@ export default {
   },
   methods: {
     setData(value, type) {
-      let code=''
+      let code = ''
     if (!isEmpty(value)) { 
         switch (type) {
-        case 'area':
-          code = this.getAreaVal(value,true,this.areas)
+          case 'area':
+             let isAreaHolder = this.currentArea == this.placeholders.area
+             code =isAreaHolder?'':this.getAreaVal(value,true,this.areas)
           break
-        case 'city':
-          code =this.getCityVal(value,true, this.cities)
+          case 'city':
+            let isCityHolder = value == this.placeholders.city
+            code =isCityHolder?'':this.getCityVal(value,true, this.cities)
           break
-        case 'province':
-          code =this.getProvinceVal(value,true)
+          case 'province':
+             let isProvinceHolder = value == this.placeholders.province
+            code = isProvinceHolder?'':this.getProvinceVal(value,true)
           break
       }
     }
      return { code, value}
     },
     emit(name) {
-
-      let provincePlaceholder = this.currentProvince==this.placeholders.province
       let data = {
-        province: this.setData(provincePlaceholder?'':this.currentProvince, 'province')
+        province: this.setData(this.currentProvince, 'province')
       }
       if (!this.onlyProvince) {
-        let cityPlaceholder = this.currentCity==this.placeholders.city
-        this.$set(data, 'city', this.setData(cityPlaceholder?'':this.currentCity, 'city'))
-      }
-      if (!this.onlyProvince || this.hideArea) {
-        let areaPlaceholder = this.currentArea==this.placeholders.area
-        this.$set(data, 'area', this.setData(areaPlaceholder?'':this.currentArea, 'area'))
+        this.$set(data, 'city', this.setData(this.currentCity, 'city'))
+      } 
+      if (!this.onlyProvince && !this.hideArea) {
+          this.$set(data, 'area', this.setData(this.currentArea, 'area'))
       }
       this.$emit(name, data)
+    },
+    changeArea() { 
+      this.$emit('area', this.setData(this.currentArea, 'area'))
+      this.emit('selected')
     },
     getCities() {
       this.currentCity = this.placeholders.city
       this.currentArea = this.placeholders.area
       this.cities = this.getCityList(this.currentProvince)
+      this.$emit('province', this.setData(this.currentProvince, 'province'))
+      if (this.onlyProvince) { 
+          this.emit('selected')
+      }
       this.cleanList()
       if (this.cities.length === 0) {
-        this.emit('selected')
         this.tab = 1
         this.showCityTab = false
       }
@@ -268,8 +269,11 @@ export default {
     getAreas() {
       this.currentArea = this.placeholders.area
       this.areas = this.getAreaList(this.currentCity)
+      this.$emit('city', this.setData(this.currentCity, 'city'))
+      if (this.hideArea) { 
+          this.emit('selected')
+      }
       if (this.areas.length === 0) {
-        this.emit('selected')
         this.tab = 2
         this.showAreaTab = false
       }
@@ -288,7 +292,6 @@ export default {
     },
     chooseProvince(name) {
       this.currentProvince = name
-      if (this.onlyProvince) return
       this.tab = 2
       this.showCityTab = true
       this.showAreaTab = false
@@ -296,14 +299,15 @@ export default {
     },
     chooseCity(name) {
       this.currentCity = name
-      if (this.hideArea) return
+      
       this.tab = 3
       this.showCityTab = true
       this.showAreaTab = true
       this.getAreas()
     },
     chooseArea(name) {
-	    this.currentArea = name
+      this.currentArea = name
+      this.changeArea()
     },
      cleanList() {
       this.areas=[]

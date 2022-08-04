@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker type="mobile" :province="select.province" :city="select.city" :area="select.area" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker type="mobile" :province="select.province" :city="select.city" :area="select.area" @province="selectProvince" @city="selectCity" @area="selectArea" @selected="onSelect"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -55,6 +55,9 @@ export default {
     selectArea(value) {
       this.select.area = value.value
       console.log(value);
+    },
+    onSelect (data) {
+      console.log(data)
     },
   },
 }
