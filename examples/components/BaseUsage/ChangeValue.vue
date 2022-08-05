@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect" @change="onChange" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetCode">setByCode</button>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetName">setByName</button>
           </div>
@@ -60,6 +60,12 @@ function changeSetCode() {
    select.city = '810100'
    select.area = 810104
 }
+function onChange({ province, city, area }) {
+    select.province = province.value
+    select.city = city.value
+    select.area = area.value
+    console.log('change',{ province, city, area })
+  }
 function changeSetName() { 
   select.province = '台湾省'
   select.city = '台北市'

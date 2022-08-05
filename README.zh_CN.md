@@ -10,7 +10,7 @@
  
 ### 文档 
 
-[文档 和 Demo ](https://19hphh.sse.codesandbox.io/)
+[文档 和 Demo ](https://jcc.github.io/v-distpicker/)
 
 [更新日志](./CHANGELOG.zh-CN.md)
 
@@ -117,6 +117,15 @@ function selectArea({ code, value }) {
 Vue 2 --->> 提交到  0.1 分支
 
 Vue 3 --->> 提交到  master 分支
+
+
+ *   如何更新文档？ 
+
+`npm run build:example`,并同步到 gh-pages分支
+
+
+
+
 
 
 

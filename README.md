@@ -10,6 +10,8 @@
 
  [English] | [简体中文](./README.zh_CN.md)
 
+ [CHANGELOG](./CHANGELOG.zh-CN.md)
+
 
 Vue 2
 
