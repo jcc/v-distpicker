@@ -72,7 +72,7 @@ export default {
 ```vue
 <template>
 
-<v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+<v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect" @change="onChange" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
 
 </template>
 
@@ -82,6 +82,9 @@ import VDistpicker from 'v-distpicker'
 let select = reactive({ province: '', city: '', area: '' })
 function onSelect(data) {
   console.log(data)
+}
+function onChange(data){
+   console.log(data)
 }
 function selectProvince({code,value}) {
   select.province = value
@@ -117,10 +120,6 @@ Vue 3 --->> 提交到  master 分支
 
 
 
-### 待办事项
-
-- [ ] 2.x 增加 change 事件 （可参考1.x）
-- [ ] 2.x  OnlyCodeArea，仅设置区级 code ，自动推导省市 （可参考1.x）
 
 
 

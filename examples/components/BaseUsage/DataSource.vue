@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker :province="select.province" :city="select.city" :area="select.area" :area-source="areaSource" :city-source="citySource" :province-source="provinceSource" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker :province="select.province" :city="select.city" :area="select.area" :area-source="areaSource" :city-source="citySource" :province-source="provinceSource" @change="onChange" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetCode">setByCode</button>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetName">setByName</button>
           </div>
@@ -31,7 +31,13 @@ import provinceSource from '../data/province_data'
 let showCode = reactive(false)
 let select = reactive({ province: '', city: '', area: '' })
 
-
+ 
+function onChange({ province, city, area }) {
+    select.province = province.value
+    select.city = city.value
+    select.area = area.value
+    console.log('change',{ province, city, area })
+  }
  
 function onSelect(data) {
   console.log(data)
