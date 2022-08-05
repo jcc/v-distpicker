@@ -5,7 +5,7 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker :province="select.province" :city="select.city" :area="select.area" :area-source="areaSource" :city-source="citySource" :province-source="provinceSource" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker :province="select.province" @change="onChange" :city="select.city" :area="select.area" :area-source="areaSource" :city-source="citySource" :province-source="provinceSource" @selected="onSelect" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetCode">setByCode</button>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetName">setByName</button>
           </div>
@@ -48,6 +48,12 @@ export default {
     onSelect (data) {
       console.log(data)
     },
+    onChange({ province, city, area }) {
+      this.select.province = province.value
+      this.select.city = city.value
+      this.select.area = area.value
+      console.log('change',{ province, city, area })
+    },
     selectProvince({ code,value}) {
        this.select.province = value
       console.log({ code,value});
@@ -66,8 +72,8 @@ export default {
       this.select.area = 810104
   },
     changeSetName() { 
-      this.select.province = '台湾省'
-      this.select.city = '台北市'
+      // this.select.province = '台湾省'
+      // this.select.city = '台北市'
       this.select.area = 710101
     }
   },

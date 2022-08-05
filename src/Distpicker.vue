@@ -86,7 +86,7 @@
 
 <script>
 import { isChn, isEmpty, isDistCode } from './util'
-import { autoCompleteDistCode, completeDistCode } from './transform'
+import { autoCompleteDistCode } from './transform'
 import DEFAULT_PROVINCE from './province'
 import DEFAULT_CITY from './city'
 import DEFAULT_AREA from './area'
@@ -209,10 +209,7 @@ export default {
     },
     area(value) {
       let area = this.area || this.placeholders.area
-      if (isDistCode(area)) { 
-        this.changeAreaCode(area)
-      }
-      this.currentArea =this.getCodeValue(area, 'area')
+      this.changeAreaCode(area)
     },
   },
   methods: {
@@ -313,12 +310,15 @@ export default {
       this.areas=[]
     },
  
-    changeAreaCode(areaCode) { 
+    changeAreaCode(areaCode) {
+      if(isDistCode(areaCode)){
       let { provinceCode, cityCode } = autoCompleteDistCode(areaCode, 'area')
       this.currentProvince = this.getProvinceVal(provinceCode, false)
       this.currentCity = this.getCityVal(cityCode, false)
       this.cities = this.getCityList(provinceCode)
       this.areas = this.getAreaList(cityCode)
+      }
+     this.currentArea =this.getCodeValue(areaCode, 'area')
     },
 /**
  * 根据名称 或 编码 ,返回下拉框选项
