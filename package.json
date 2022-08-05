@@ -26,10 +26,11 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "cross-env NODE_ENV=production rollup -c script/rollup.config.js"
+    "build": "cross-env NODE_ENV=production rollup -c script/rollup.config.js",
+    "build:example": "vite build --mode=example"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "vue": "~3.2.37"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,8 @@
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.49.11",
-    "vite": "^2.9.0"
+    "vite": "~3.0.0",
+    "vite-plugin-html": "^3.2.0"
   },
   "browserslist": [
     "> 1%",

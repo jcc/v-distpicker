@@ -1,23 +1,37 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 export default ({ mode }) => {
-  const __DEV__ = mode === 'development'
-  // reactivityTransform require vue@^3.2.25  https://vuejs.org/guide/extras/reactivity-transform.html#typescript-integration
-  return defineConfig({
+  const DEV = mode === 'development'
+  const BUILD_EXAMPLE = mode === 'example'
+
+  let config = {
     plugins: [
       vue({
-        isProduction: __DEV__,
         reactivityTransform: true,
       }),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            DEV: DEV,
+            EXAMPLE: BUILD_EXAMPLE,
+          },
+        },
+      }),
     ],
-    root: __DEV__ ? resolve(__dirname, 'examples/') : process.cwd(),
-    server: {
-      port: 3000,
+    resolve: {
+      extensions: ['.js', '.json', '.vue'],
     },
-    build: {
-      // https://cn.vitejs.dev/config/#build-csscodesplits
+  }
+  if (DEV || BUILD_EXAMPLE) {
+    config.root = resolve(__dirname, 'examples/')
+    config.resolve.alias = {
+      '@': resolve(__dirname, './src'),
+    }
+  } else {
+    config.build = {
       cssCodeSplit: true,
       rollupOptions: {
         external: ['vue'],
@@ -33,12 +47,15 @@ export default ({ mode }) => {
         formats: ['umd'],
         fileName: () => 'v-distpicker.js',
       },
-    },
-    resolve: {
-      extensions: ['.js', '.json', '.vue'],
-      alias: {
-        '@': resolve(__dirname, './src'),
-      },
-    },
-  })
+    }
+  }
+  if (BUILD_EXAMPLE) {
+    config.publicDir = 'static'
+    config.build = {
+      outDir: '../dist-examples',
+      emptyOutDir: true,
+    }
+    config.base = './'
+  }
+  return defineConfig(config)
 }
