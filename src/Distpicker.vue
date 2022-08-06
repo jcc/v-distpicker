@@ -295,7 +295,6 @@ function resetCity() {
 }
 function chooseProvince(name) {
   currentProvince = name
-  if (props.onlyProvince) return
   tab = 2
   showCityTab = true
   showAreaTab = false
@@ -303,7 +302,6 @@ function chooseProvince(name) {
 }
 function chooseCity(name) {
   currentCity = name
-  if (props.hideArea) return
   tab = 3
   showCityTab = true
   showAreaTab = true
