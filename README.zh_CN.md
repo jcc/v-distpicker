@@ -8,11 +8,7 @@
 [English](./README.md) | [简体中文]
 
  
-### 文档 
 
-[文档 和 Demo ](https://19hphh.sse.codesandbox.io/)
-
-[更新日志](./CHANGELOG.zh-CN.md)
 
  
 ### 使用

@@ -6,9 +6,11 @@
 
 # V - Distpicker
 
-[Documents and  Demo ](https://19hphh.sse.codesandbox.io/)
+ [Documents and  Demo ](https://jcc.github.io/v-distpicker/)
 
  [English] | [简体中文](./README.zh_CN.md)
+
+ [CHANGELOG](./CHANGELOG.zh-CN.md)
 
 ## Installation
 
