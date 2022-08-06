@@ -32,6 +32,26 @@
               <td><strong>选择最后一项时触发</strong></td>
               <td>返回省市区的值</td>
             </tr>
+            <tr>
+              <td><strong>change-province</strong></td>
+              <td><strong>改变时触发</strong></td>
+              <td>返回省市区的值</td>
+            </tr>
+            <tr>
+              <td><strong>change-city</strong></td>
+              <td><strong>改变时触发</strong></td>
+              <td>返回省市区的值</td>
+            </tr>
+            <tr>
+              <td><strong>change-area</strong></td>
+              <td><strong>改变时触发</strong></td>
+              <td>返回省市区的值</td>
+            </tr>
+            <tr>
+              <td><strong>change</strong></td>
+              <td><strong>改变最后一项时触发</strong></td>
+              <td>返回省市区的值</td>
+            </tr>
           </tbody>
         </table>
       </div>

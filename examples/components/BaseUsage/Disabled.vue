@@ -20,9 +20,6 @@
             <pre><code>{{ select }}</code></pre>
           </div>
         </div>
-        <div class="box-footer" @click="showCode = !showCode">
-          {{ showCode ? 'Hide Code' : 'Show Code' }}
-        </div>
       </div>
     </div>
   </div>

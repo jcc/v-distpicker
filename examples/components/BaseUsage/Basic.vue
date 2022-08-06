@@ -37,7 +37,7 @@
 <script setup>
 import { reactive } from 'vue'
 
-let showCode = reactive(false)
+let showCode = $ref(false)
 let select = reactive({ province: '', city: '', area: '' })
 function onSelect(data) {
   console.log(data)
