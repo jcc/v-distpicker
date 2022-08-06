@@ -10,10 +10,10 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@master
 
-      - name: Use Node.js 12
+      - name: Use Node.js 14
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Install and Build 🔧
         run: |
