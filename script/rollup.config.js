@@ -5,7 +5,7 @@ import scss from 'rollup-plugin-scss'
 import dartSass from 'sass'
 import { terser } from 'rollup-plugin-terser'
 import vue from '@vitejs/plugin-vue'
-import { name, version, author, license } from '../package.json'
+import { name, version, author, license, main, module } from '../package.json'
 const isProd = process.env.NODE_ENV === 'production'
 
 const banner =
@@ -15,19 +15,29 @@ const banner =
   ` * Released under the ${license} License.\n` +
   ' */'
 
+const globals = {
+  vue: 'Vue',
+}
+
 export default {
   input: 'src/index.js',
-  output: {
-    globals: {
-      vue: 'Vue',
+  output: [
+    {
+      globals,
+      name: 'VDistpicker',
+      file: main,
+      format: 'umd',
+      banner,
+      sourcemap: !isProd,
+      plugins: [terser()],
     },
-    name: 'VDistpicker',
-    file: 'dist/v-distpicker.js',
-    format: 'umd',
-    banner,
-    sourcemap: !isProd,
-    plugins: [terser()],
-  },
+    {
+      banner,
+      file: module,
+      format: 'esm',
+      plugins: [terser()],
+    },
+  ],
   external: ['vue'],
   plugins: [
     vue({

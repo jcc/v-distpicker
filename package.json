@@ -1,13 +1,14 @@
 {
   "name": "v-distpicker",
   "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
   "main": "dist/v-distpicker.js",
+  "module": "dist/v-distpicker.esm.js",
   "files": [
     "src",
-    "dist/*.js"
+    "dist"
   ],
   "keywords": [
     "省份",
@@ -36,6 +37,7 @@
     "type": "git",
     "url": "git+https://github.com/jcc/v-distpicker.git"
   },
+  "homepage": "https://jcc.github.io/v-distpicker/",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/plugin-transform-runtime": "^7.18.10",
