@@ -6,7 +6,7 @@
 
 # V - Distpicker
 
-[Documents and  Demo ](https://19hphh.sse.codesandbox.io/)
+[Documents and  Demo ](https://jcc.github.io/v-distpicker/)
 
  [English] | [简体中文](./README.zh_CN.md)
 
@@ -139,6 +139,7 @@ function selectArea({ code, value }) {
 | type | String | 区分pc和mobile,默认pc |  ||
 | only-province | Boolean | 只显示省级选择器| false ||
 | hide-area | Boolean | 隐藏区级 | false ||
+| disabled | Boolean | 禁用 | false ||
 | province-disabled | Boolean | 禁用省 | false ||
 | city-disabled | Boolean | 禁用市 | false ||
 | area-disabled | Boolean | 禁用区 | false ||

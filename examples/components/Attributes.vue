@@ -46,49 +46,49 @@
               <td><strong>disabled</strong></td>
               <td><strong>是否禁用（选填，默认 false，且 type='mobile' 时无效，当disabled=true时province-disabled、city-disabled、area-disabled均无效）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>province-disabled</strong></td>
               <td><strong>是否禁用省（选填，默认 false，且 type='mobile' 时无效）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>city-disabled</strong></td>
               <td><strong>是否禁用市（选填，默认 false，且 type='mobile' 时无效）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>area-disabled</strong></td>
               <td><strong>是否禁用区、县（选填，默认 false，且 type='mobile' 时无效）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>hide-area</strong></td>
               <td><strong>隐藏地区（选填）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>only-province</strong></td>
               <td><strong>只显示省份（选填）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
               <td><strong>static-placeholder</strong></td>
               <td><strong>是否将占位符显示为已经选择的项（仅 type='mobile' 时有效）</strong></td>
               <td>Boolean</td>
-              <td>true, false</td>
+              <td></td>
               <td>false</td>
             </tr>
             <tr>
