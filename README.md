@@ -6,12 +6,22 @@
 
 # V - Distpicker
 
+
+![github-stars](https://img.shields.io/github/stars/jcc/v-distpicker.svg) ![github-stars](http://img.shields.io/npm/v/v-distpicker.svg?style=flat-square) ![download-image](https://img.shields.io/npm/dm/v-distpicker.svg?style=flat-square)
+
+
+
 [Documents and  Demo ](https://jcc.github.io/v-distpicker/)
 
  [English] | [简体中文](./README.zh_CN.md)
 
  [CHANGELOG](./CHANGELOG.zh-CN.md)
 
+
+
+
+
+## Installation
 
 Vue 2
 
@@ -22,14 +32,7 @@ npm install v-distpicker@^1.3.1 --save
 Vue 3
 
 ```shell
-npm install v-distpicker@^2.0.6 --save
-```
-
-
-## Installation
-
-```shell
-npm install v-distpicker@^1.3.1 --save
+npm install v-distpicker --save
 ```
 
 ## Usage

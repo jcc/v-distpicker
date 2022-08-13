@@ -20,7 +20,7 @@
 #### Vue 2  安装1.x 版本
 
 ```shell
- npm install v-distpicker@^1.3.0 --save
+ npm install v-distpicker@^1.3.1 --save
 ```
 
 ```vue
@@ -66,7 +66,7 @@ export default {
 #### Vue 3  安装2.x 版本
 
 ```shell
- npm install v-distpicker@^2.0.6 --save
+ npm install v-distpicker@^2.0.8 --save
 ```
 
 ```vue
