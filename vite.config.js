@@ -30,6 +30,9 @@ export default ({ mode }) => {
     config.resolve.alias = {
       '@': resolve(__dirname, './src'),
     }
+    config.server = {
+      host: '0.0.0.0',
+    }
   } else {
     config.build = {
       cssCodeSplit: true,
