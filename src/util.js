@@ -18,10 +18,8 @@ function isEmpty(value) {
 }
 
 /**
- *
- * 简单的判断是否是 省市区 code
- * 如何是 区级code,自动推导省市
- * 如何是 市级code,自动推导省
+ *  判断 省市区 code
+ *  区级code,自动推导省市
  */
 function isDistCode(str) {
   if (isEmpty(str)) return false
@@ -39,4 +37,10 @@ function isDistCode(str) {
 function isChn(str) {
   return /[\u4E00-\u9FA5]/.test(str)
 }
-export { toString, isChn, isEmpty, isDistCode }
+
+const ua = navigator.userAgent.toLowerCase()
+const isMobile = /ios|iphone|ipod|ipad|android/.test(ua)
+
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
+
+export { toString, isChn, isEmpty, isDistCode, clamp, isMobile }

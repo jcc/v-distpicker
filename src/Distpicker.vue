@@ -68,11 +68,10 @@
 </template>
 <script setup>
 import { onBeforeMount, reactive, watch } from 'vue'
-import { isChn, isEmpty, isDistCode } from './util'
+import {  isEmpty, isDistCode } from './util'
 import { autoCompleteDistCode } from './transform'
-import DEFAULT_PROVINCE from './province'
-import DEFAULT_CITY from './city'
-import DEFAULT_AREA from './area'
+import { useHandler} from './hooks'
+
 
 const emitEvent = defineEmits(['selected', 'province', 'city', 'area','change-province','change-city','change-area','change'])
 const props = defineProps({
@@ -116,14 +115,10 @@ let areas = $ref([])
 let currentProvince = $ref('')
 let currentCity = $ref('')
 let currentArea = $ref('')
-let provinceData = reactive({})
-let cityData = reactive({})
-let areaData = reactive({})
- 
 
-  provinceData = props.provinceSource || DEFAULT_PROVINCE
-  cityData = props.citySource || DEFAULT_CITY
-  areaData = props.areaSource || DEFAULT_AREA
+
+
+let  {  getProvinceList, getCityList, getAreaList, getProvinceVal, getAreaVal, getCityVal, getCodeValue }=useHandler(props)
   
 onBeforeMount(() => {
   
@@ -217,7 +212,7 @@ watch(
   }
 )
 
-function setData(value, type,) { 
+function setData(value, type) { 
   let code=''
   if (!isEmpty(value)) { 
       switch (type) {
@@ -325,112 +320,6 @@ function changeAreaCode(areaCode) {
    }
   currentArea = getCodeValue(areaCode, 'area')
 }
-
-
-/**
- * 根据名称 或 编码 ,返回下拉框选项
- * 名称转换为编码查找
- *@param codeOrName 名称 或 编码 
- * 
- */
-function getCityList(codeOrName) {
-   let code  = isChn(codeOrName)?getProvinceVal(codeOrName,true):codeOrName
-   return  cityData[code] || []
-}
-
-function getAreaList(codeOrName) { 
-  let code = isChn(codeOrName) ? getCityVal(codeOrName,true) : codeOrName
-  return areaData[code]||[]
-}
-
-function getProvinceList() { 
-  return provinceData
-}
-
-function getTransformData(val,itemCode,data,isName) { 
-  if (isName) {
-        if (data[itemCode] == val)  return itemCode
-      } else { 
-        if (itemCode == val) return data[itemCode]
-  }
-  return null
-}
- 
-
-/**
- * 查找
- * @param provinceVal 值
- * @param data 数据源,默认从所有数据查找
- * @param isName false 传入编码 返回 名称，true 传入名称 返回 编码
- */
-function getCityVal(cityVal,isName=false, data) { 
-    if (data) {
-      for (let itemCode in data) {
-        let val = getTransformData(cityVal, itemCode, data,isName)
-        if(val) return val
-      }
-    } else { 
-       let cityArr = Object.values(cityData)
-      for (let item of cityArr) { 
-        for (let itemCode in item) {
-          let val = getTransformData(cityVal, itemCode, item,isName)
-          if (val) return val
-        }
-      }
-    }
-    return cityVal
-}
-
-function getProvinceVal(provinceVal,isName=false) {
-    for (let itemCode in provinceData) {
-      let val = getTransformData(provinceVal, itemCode, provinceData,isName)
-       if(val) return val
-    }
-    return provinceVal
-}
-
-function getAreaVal(areaVal,isName=false,data) { 
-    if (data) {
-      for (let itemCode in data) {
-        let val = getTransformData(areaVal, itemCode, data,isName)
-        if (val) return val
-      }
-    } else { 
-      let areaArr = Object.values(areaData)
-      for (let item of areaArr) { 
-        for (let itemCode in item) {
-          let val = getTransformData(areaVal, itemCode, item,isName)
-          if (val) return val
-          }
-        }
-    }
-  return areaVal
-}
-
-/**
- * 根据 编码，返回 名称
- */
-function getCodeValue(codeOrName, type, isName = false) {
-  if (isEmpty(codeOrName)) return ''
-   let name = codeOrName
-  if (codeOrName && !isChn(codeOrName)) {
-    switch (type) {
-      case 'area':
-        name = getAreaVal(codeOrName, isName)
-        break
-      case 'city':
-        name = getCityVal(codeOrName, isName)
-        break
-      case 'province':
-        name = getProvinceVal(codeOrName, isName)
-        break
-    }
-    return name
-  }
-  return name
-}
-
-
 </script>
 
 <style lang="scss">
