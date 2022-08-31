@@ -102,6 +102,14 @@ function selectArea({ code, value }) {
 ```
 
 
+## 版本发布
+
+```shell
+1.更新 package.json 和 package-lock.json中的 version
+2.npm run build
+3.git tag v2.0.x
+4.git push origin :refs/tags/v2.0.x
+```
 
 
 
