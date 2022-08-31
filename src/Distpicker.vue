@@ -296,7 +296,6 @@ export default {
     },
     chooseCity(name) {
       this.currentCity = name
-      
       this.tab = 3
       this.showCityTab = true
       this.showAreaTab = true
