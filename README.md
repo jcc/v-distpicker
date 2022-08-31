@@ -26,14 +26,15 @@
 Vue 2
 
 ```shell
-npm install v-distpicker@^1.3.1 --save
+npm install v-distpicker@^1.3.2 --save
 ```
 
 Vue 3
 
 ```shell
-npm install v-distpicker --save
+npm install v-distpicker@^2.0.9 --save
 ```
+ 
 
 ## Usage
 
