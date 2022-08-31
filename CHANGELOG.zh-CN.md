@@ -28,7 +28,7 @@
 
 `2022-08-05`
 
-- 添加重庆市下的县级数据 [#175](https://github.com/jcc/v-distpicker/pull/176)
+- 添加重庆市下的县级数据 [#176](https://github.com/jcc/v-distpicker/pull/176)
 
 
 
