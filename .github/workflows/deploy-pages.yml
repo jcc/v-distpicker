@@ -11,18 +11,23 @@ jobs:
         uses: actions/checkout@master
 
       - name: Use Node.js 14
-        uses: actions/setup-node@v2-beta
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
+          cache: 'npm'
 
-      - name: Install and Build 🔧
+      - name: Install Dependencies  🔧
         run: |
           npm install
+
+      - name: Build Site 🔧
+        run: |
           npm run build:example
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: dist-examples
+          clean: false

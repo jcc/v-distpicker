@@ -1,5 +1,5 @@
 /*!
- * v-distpicker v2.0.8
+ * v-distpicker v2.0.9
  * (c) 2017-2022 jcc <changejian@gmail.com>
  * Released under the MIT License.
  */

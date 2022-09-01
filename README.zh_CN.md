@@ -109,9 +109,9 @@ function selectArea({ code, value }) {
 ```shell
 1.更新 package.json 和 package-lock.json中的 version
 2.npm run build 
-3.npm run build:example ## doc 构建
-3.git tag v2.0.x  ## tag  
-4.git push origin :refs/tags/v2.0.x
+3.git push
+4.git tag v2.0.x  ## tag  
+5.git push origin :refs/tags/v2.0.x
 ```
 
 
