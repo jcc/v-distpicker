@@ -1,7 +1,7 @@
 {
   "name": "v-distpicker",
   "description": "A flexible, highly available district selector for picking provinces, cities and districts of China.",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "author": "jcc <changejian@gmail.com>",
   "license": "MIT",
   "main": "dist/v-distpicker.js",
@@ -49,7 +49,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "cross-env": "^7.0.3",
     "eslint": "^8.12.0",
-    "eslint-plugin-vue": "^8.5.0",
+    "eslint-plugin-vue": "^9.5.1",
     "rollup": "^2.77.2",
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-terser": "^7.0.2",

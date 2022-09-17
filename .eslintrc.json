@@ -1,46 +1,47 @@
 {
-  "parser": "vue-eslint-parser",
-  "extends": [
-    "plugin:vue/vue3-recommended"
-  ],
-  "plugins": [
-    "vue"
-  ],
-  "env": {
-    "vue/setup-compiler-macros": true,
-    "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "sourceType": "module"
-  },
-  "rules": {
-    "no-const-assign": "warn",
-    "no-this-before-super": "warn",
-    "no-undef": "warn",
-    "no-unreachable": "warn",
-    "no-unused-vars": "warn",
-    "constructor-super": "warn",
-    "valid-typeof": "warn",
-    "semi": [
-      "warn",
-      "never"
+    "parser": "vue-eslint-parser",
+    "env": {
+        "vue/setup-compiler-macros": true,
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/vue3-essential"
     ],
-    "quotes": [
-      "warn",
-      "single"
+    "overrides": [
     ],
-    "arrow-parens": 0,
-    "generator-star-spacing": 0,
-    "space-before-function-paren": 0,
-    "vue/multi-word-component-names": "off",
-    "vue/max-attributes-per-line":"off",
-    "vue/require-default-prop": "off",
-    "vue/html-self-closing": "off",
-    "vue/singleline-html-element-content-newline":"off"
-
-  }
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "vue"
+    ],
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "semi": [
+        "warn",
+        "never"
+        ],
+        "quotes": [
+        "warn",
+        "single"
+        ],
+        "arrow-parens": 0,
+        "generator-star-spacing": 0,
+        "space-before-function-paren": 0,
+        "vue/multi-word-component-names": "off",
+        "vue/max-attributes-per-line":"off",
+        "vue/require-default-prop": "off",
+        "vue/html-self-closing": "off",
+        "vue/singleline-html-element-content-newline":"off"
+    }
 }

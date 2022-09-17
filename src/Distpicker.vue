@@ -131,13 +131,15 @@ onBeforeMount(() => {
         currentCity = getCityVal(cityCode, false)||props.placeholders.city
         cityVal=cityCode
     }
-    
-    currentArea = getCodeValue(props.area, 'area')||props.placeholders.area
-    if (isEmpty(currentProvince)) { 
-       currentProvince =getCodeValue(provinceVal, 'province')||props.placeholders.province
+     let { name:areaName } = getCodeValue(props.area, 'area')
+     currentArea = areaName || props.placeholders.area
+  if (isEmpty(currentProvince)) { 
+    let { name: provinceName } = getCodeValue(provinceVal, 'province')
+      currentProvince = provinceName || props.placeholders.province
     }
-    if (isEmpty(currentCity)) { 
-        currentCity = getCodeValue(cityVal, 'city')||props.placeholders.city
+  if (isEmpty(currentCity)) { 
+    let { name: cityName } = getCodeValue(cityVal, 'city')
+        currentCity = cityName||props.placeholders.city
     }
   if (props.type !== 'mobile') {
      provinces = getProvinceList()
@@ -159,8 +161,6 @@ onBeforeMount(() => {
   }
 })
 
-
-
 watch(
   () => currentProvince,
   (value) => {
@@ -170,6 +170,7 @@ watch(
     }
   }
 )
+
 watch(
   () => currentCity,
   (value) => {
@@ -179,6 +180,7 @@ watch(
     }
   }
 )
+
 watch(
   () => currentArea,
   (value) => {
@@ -190,25 +192,28 @@ watch(
 watch(
   () => props.province,
   () => {
-      let val =props.province || props.placeholders.province
-      currentProvince =getCodeValue(val,'province')
-      cities = getCityList(currentProvince)
+    let val = props.province || props.placeholders.province
+    let { name: provinceName, code: provinceCode } = getCodeValue(val, 'province')
+      currentProvince = provinceName
+      cities = getCityList(provinceCode)
   }
 )
 
 watch(
   () => props.city,
   () => {
-    let city  = props.city || props.placeholders.city
-     currentCity = getCodeValue(city, 'city')
-      areas = getAreaList(city)
+    let city = props.city || props.placeholders.city
+    let { name:cityName,code:cityCode }  = getCodeValue(city, 'city', cities)
+    currentCity=cityName
+    areas = getAreaList(cityCode)
   }
 )
+
 watch(
   () => props.area,
   () => {
     let area = props.area || props.placeholders.area
-     changeAreaCode(area) 
+     changeAreaCode(area)
   }
 )
 
@@ -216,17 +221,14 @@ function setData(value, type) {
   let code=''
   if (!isEmpty(value)) { 
       switch (type) {
-      case 'area':
-         let isAreaHolder = currentArea == props.placeholders.area
-        code = isAreaHolder ? '' : getAreaVal(value, true, areas)
+        case 'area':
+        code = currentArea == props.placeholders.area ? '' : getAreaVal(value, true, areas)
         break
       case 'city':
-         let isCityHolder = value == props.placeholders.city
-          code =isCityHolder?'':getCityVal(value,true, cities)
+          code =value == props.placeholders.city?'':getCityVal(value,true, cities)
         break
       case 'province':
-        let isProvinceHolder = value == props.placeholders.province
-        code = isProvinceHolder?'':getProvinceVal(value,true)
+        code = value == props.placeholders.province?'':getProvinceVal(value,true)
         break
     }
   }
@@ -266,8 +268,9 @@ function getCities() {
 }
 function getAreas() {
   currentArea = props.placeholders.area
-  areas = getAreaList(currentCity)
-   emitEvent('city', setData(currentCity, 'city'))
+  let { code: cityCode } = getCodeValue(currentCity, 'city', cities)
+  areas = getAreaList(cityCode)
+  emitEvent('city', setData(currentCity, 'city'))
   if(props.hideArea) {
       emit('selected')
   }
@@ -317,8 +320,9 @@ function changeAreaCode(areaCode) {
     currentCity = getCityVal(cityCode, false)
     cities = getCityList(provinceCode)
     areas = getAreaList(cityCode)
-   }
-  currentArea = getCodeValue(areaCode, 'area')
+  }
+  let { name:areaName } = getCodeValue(areaCode, 'area')
+  currentArea = areaName
 }
 </script>
 

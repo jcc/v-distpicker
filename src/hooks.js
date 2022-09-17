@@ -97,26 +97,23 @@ export const useHandler = (props) => {
   }
 
   /**
-   * 根据 编码，返回 名称
+   * 查找
    */
-  const getCodeValue = (codeOrName, type, isName = false) => {
-    if (isEmpty(codeOrName)) return ''
-    let name = codeOrName
-    if (codeOrName && !isChn(codeOrName)) {
-      switch (type) {
-        case 'area':
-          name = getAreaVal(codeOrName, isName)
-          break
-        case 'city':
-          name = getCityVal(codeOrName, isName)
-          break
-        case 'province':
-          name = getProvinceVal(codeOrName, isName)
-          break
-      }
-      return name
+  const getCodeValue = (codeOrName, type, data) => {
+    if (isEmpty(codeOrName)) return { name: '', value: '' }
+    let value = ''
+    switch (type) {
+      case 'area':
+        value = getAreaVal(codeOrName, isChn(codeOrName), data)
+        break
+      case 'city':
+        value = getCityVal(codeOrName, isChn(codeOrName), data)
+        break
+      case 'province':
+        value = getProvinceVal(codeOrName, isChn(codeOrName))
+        break
     }
-    return name
+    return isChn(codeOrName) ? { name: codeOrName, code: value } : { name: value, code: codeOrName }
   }
 
   return {
