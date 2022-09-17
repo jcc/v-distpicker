@@ -66,7 +66,7 @@ export default {
 #### Vue 3  安装2.x 版本
 
 ```shell
- npm install v-distpicker@^2.0.9 --save
+ npm install v-distpicker@^2.1.0 --save
 ```
 
 > 安装时一定要指定具体的版本号，npm install 会默认安装最后发布的版本
