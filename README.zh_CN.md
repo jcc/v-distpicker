@@ -20,7 +20,7 @@
 #### Vue 2  安装1.x 版本
 
 ```shell
- npm install v-distpicker@^1.3.2 --save
+ npm install v-distpicker@^1.3.3 --save
 ```
 
 ```vue
