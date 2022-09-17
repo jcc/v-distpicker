@@ -111,7 +111,13 @@ function selectArea({ code, value }) {
 2.npm run build 
 3.git push
 4.git tag v2.0.x  ## tag  
-5.git push origin :refs/tags/v2.0.x
+5.git push origin v2.0.x # push remote tag
+```
+
+
+```shell
+git tag -d v2.0.x # del tag
+git push origin :refs/tags/v2.0.x # del remote tag
 ```
 
 
