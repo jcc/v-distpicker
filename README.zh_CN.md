@@ -105,7 +105,7 @@ function selectArea({ code, value }) {
 
 
 ## 版本发布
-
+> 目前Vue 2 使用量比Vue 3大,默认请先发布Vue3版本,再发布Vue2版本。npm install 默认安装后发布的版本
 ```shell
 1.更新 package.json 和 package-lock.json中的 version
 2.npm run build 
