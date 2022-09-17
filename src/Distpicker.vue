@@ -153,13 +153,15 @@ export default {
         this.currentCity = this.getCityVal(cityCode, false)||this.placeholders.city
         cityVal=cityCode
     }
-    
-    this.currentArea = this.getCodeValue(this.area, 'area')||this.placeholders.area
+    let { name:areaName } = this.getCodeValue(this.area, 'area')
+    this.currentArea = areaName || this.placeholders.area
     if (isEmpty(this.currentProvince)) { 
-       this.currentProvince =this.getCodeValue(provinceVal, 'province')||this.placeholders.province
+      let { name: provinceName } =this.getCodeValue(provinceVal, 'province')
+      this.currentProvince = provinceName || this.placeholders.province
     }
     if (isEmpty(this.currentCity)) { 
-        this.currentCity = this.getCodeValue(cityVal, 'city')||this.placeholders.city
+      let { name: cityName } = this.getCodeValue(cityVal, 'city')
+      this.currentCity = cityName || this.placeholders.city
     }
     if (this.type !== 'mobile') {
        this.provinces =this. getProvinceList()
@@ -199,13 +201,15 @@ export default {
     },
     province(value) {
       let val = this.province || this.placeholders.province
-      this.currentProvince = this.getCodeValue(val, 'province')
-      this.cities = this.getCityList(this.currentProvince)
+      let { name: provinceName, code: provinceCode } = this.getCodeValue(val, 'province')
+      this.currentProvince =provinceName
+      this.cities = this.getCityList(provinceCode)
     },
     city(value) {
       let city = this.city || this.placeholders.city
-      this.currentCity = this.getCodeValue(city, 'city')
-      this.areas =this.getAreaList(city)  
+      let { name:cityName,code:cityCode }  = this.getCodeValue(city, 'city', this.cities)
+      this.currentCity = cityName
+      this.areas =this.getAreaList(cityCode)  
     },
     area(value) {
       let area = this.area || this.placeholders.area
@@ -265,7 +269,8 @@ export default {
     },
     getAreas() {
       this.currentArea = this.placeholders.area
-      this.areas = this.getAreaList(this.currentCity)
+      let { code: cityCode } =this.getCodeValue(this.currentCity, 'city',this.cities)
+      this.areas = this.getAreaList(cityCode)
       this.$emit('city', this.setData(this.currentCity, 'city'))
       if (this.hideArea) { 
           this.emit('selected')
@@ -317,7 +322,8 @@ export default {
       this.cities = this.getCityList(provinceCode)
       this.areas = this.getAreaList(cityCode)
       }
-     this.currentArea =this.getCodeValue(areaCode, 'area')
+      let { name:areaName } =this.getCodeValue(areaCode, 'area')
+      this.currentArea = areaName
     },
 /**
  * 根据名称 或 编码 ,返回下拉框选项
@@ -400,28 +406,24 @@ export default {
 },
 
 /**
- * 根据 编码，返回 名称
+ * 查找
  */
- getCodeValue(codeOrName, type, isName = false) {
-  if (isEmpty(codeOrName)) return ''
-   let name = codeOrName
-  if (codeOrName && !isChn(codeOrName)) {
+ getCodeValue(codeOrName, type,data) {
+  if (isEmpty(codeOrName)) return { name: '', value: '' }
+  let value = ''
     switch (type) {
       case 'area':
-        name =this.getAreaVal(codeOrName, isName)
+      value =this.getAreaVal(codeOrName, isChn(codeOrName),data)
         break
       case 'city':
-        name = this.getCityVal(codeOrName, isName)
+      value = this.getCityVal(codeOrName, isChn(codeOrName),data)
         break
       case 'province':
-        name = this. getProvinceVal(codeOrName, isName)
+      value = this.getProvinceVal(codeOrName, isChn(codeOrName))
         break
     }
-    return name
-  }
-  return name
+    return isChn(codeOrName) ? { name: codeOrName, code: value } : { name: value, code: codeOrName }
  },
- 
  }
 }
 </script>
