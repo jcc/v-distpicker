@@ -1,9 +1,8 @@
 
 # V - Distpicker
 
-
-
- 
+- Vue2 版 兼容 IE 11
+- 支持自定义省市区数据
 
 [English](./README.md) | [简体中文]
 
@@ -16,7 +15,7 @@
  Vue 2  安装1.x 版本
 
 ```shell
- npm install v-distpicker@^1.3.0 --save
+ npm install v-distpicker@^1.3.3 --save
 ```
 
 ```vue
@@ -62,7 +61,7 @@ export default {
  Vue 3  安装2.x 版本
 
 ```shell
- npm install v-distpicker@^2.0.6 --save
+ npm install v-distpicker@^2.1.0 --save
 ```
 
 ```vue
