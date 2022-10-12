@@ -164,7 +164,7 @@ function selectArea({ code, value }) {
 | province | Function | 选择省时触发 |{code,value} |
 | city | Function | 选择市时触发 |{code,value} |
 | area | Function | 选择区时触发 |{code,value} |
-| select | Function | 选择最后一项时触发 |{province:{code,value},city:{code,value},area:{code,value} } |
+| selected | Function | 选择最后一项时触发 |{province:{code,value},city:{code,value},area:{code,value} } |
 | change-province | Function | 省级改变时触发 |{code,value} |
 | change-city | Function | 市级改变时触发 |{code,value} |
 | change-area | Function | 区级改变时触发 |{code,value} |
