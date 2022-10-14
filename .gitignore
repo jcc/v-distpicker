@@ -23,10 +23,3 @@ dist-examples
 *.njsproj
 *.sln
 *.sw?
-
-
-##
-.npmrc
-pnpm-workspace.yaml
-pnpm-lock.yaml
-
