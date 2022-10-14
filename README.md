@@ -33,7 +33,7 @@ CDN
 ```html
 <script src="https://cdn.jsdelivr.net/npm/v-distpicker@version/dist/v-distpicker.js"></script>
 <!-- or -->
-<script src=" https://unpkg.com/v-distpicker@version/dist/v-distpicker.js"></script>
+<script src="https://unpkg.com/v-distpicker@version/dist/v-distpicker.js"></script>
 ```
 
 ## Usage
