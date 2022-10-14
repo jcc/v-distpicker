@@ -1,13 +1,16 @@
 import { isChn, isEmpty } from './util'
 
-import DEFAULT_PROVINCE from './province'
-import DEFAULT_CITY from './city'
-import DEFAULT_AREA from './area'
+
+
+import DEFAULT_DATA from './districts'
 
 export const useHandler = (props) => {
-  let provinceData = props.provinceSource || DEFAULT_PROVINCE
-  let cityData = props.citySource || DEFAULT_CITY
-  let areaData = props.areaSource || DEFAULT_AREA
+
+  let provinceData = props.provinceSource || DEFAULT_DATA.province_list
+  let cityData = props.citySource || DEFAULT_DATA.city_list
+  let areaData = props.areaSource || DEFAULT_DATA.area_list
+
+
 
   /**
    * 根据名称 或 编码 ,返回下拉框选项
