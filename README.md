@@ -165,6 +165,7 @@ function selectArea({ code, value }) {
 <a href="https://github.com/jcc/v-distpicker/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=jcc/v-distpicker" />
 </a>
+
 ## Thanks
 
 - [Distpicker](https://github.com/fengyuanchen/distpicker)
