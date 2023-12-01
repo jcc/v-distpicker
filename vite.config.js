@@ -9,9 +9,7 @@ export default ({ mode }) => {
 
   let config = {
     plugins: [
-      vue({
-        reactivityTransform: true,
-      }),
+      vue(),
       createHtmlPlugin({
         inject: {
           data: {

@@ -5,7 +5,8 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect" @change="onChange" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker :province="select.province" :city="select.city" :area="select.area" @selected="onSelect"
+              @change="onChange" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetCode">setByCode</button>
             <button class="btn btn-primary btn-sm example-btn" @click="changeSetName">setByName</button>
           </div>
@@ -15,8 +16,7 @@
         </div>
         <div v-if="showCode" class="box-right col-md-12">
           <pre
-            class="language-javascript code-toolbar"
-          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+            class="language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -37,36 +37,36 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-let showCode = $ref(false)
+import { reactive, ref } from 'vue'
+let showCode = ref(false)
 let select = reactive({ province: '', city: '', area: '' })
-function onSelect(data) {
+function onSelect (data) {
   console.log(data)
 }
-function selectProvince({code,value}) {
+function selectProvince ({ code, value }) {
   select.province = value
-  console.log({code, value})
+  console.log({ code, value })
 }
-function selectCity({code,value}) {
+function selectCity ({ code, value }) {
   select.city = value
-  console.log({code, value})
+  console.log({ code, value })
 }
-function selectArea({ code, value }) {
+function selectArea ({ code, value }) {
   select.area = value
-  console.log({code, value})
+  console.log({ code, value })
 }
-function changeSetCode() {
-   select.province = 810000
-   select.city = '810100'
-   select.area = 810104
+function changeSetCode () {
+  select.province = 810000
+  select.city = '810100'
+  select.area = 810104
 }
-function onChange({ province, city, area }) {
-    select.province = province.value
-    select.city = city.value
-    select.area = area.value
-    console.log('change',{ province, city, area })
-  }
-function changeSetName() { 
+function onChange ({ province, city, area }) {
+  select.province = province.value
+  select.city = city.value
+  select.area = area.value
+  console.log('change', { province, city, area })
+}
+function changeSetName () {
   select.province = '台湾省'
   select.city = '台北市'
   select.area = 710101

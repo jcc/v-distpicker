@@ -13,8 +13,7 @@
         </div>
         <div v-if="showCode" class="box-right col-md-12">
           <pre
-            class="language-javascript code-toolbar"
-          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+            class="language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker type<span class="token operator">=</span><span class="token string">"mobile"</span> only<span class="token operator">-</span>province<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -35,9 +34,10 @@
 </template>
 
 <script setup>
-let showCode = $ref(false)
-let select = $ref({ province: '' })
-function selectProvince(value) {
+import { ref, reactive } from 'vue'
+let showCode = ref(false)
+let select = reactive({ province: '' })
+function selectProvince (value) {
   select.province = value
   console.log(value)
 }

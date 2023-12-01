@@ -5,7 +5,8 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker type="mobile" static-placeholder @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
+            <v-distpicker type="mobile" static-placeholder @province="selectProvince" @city="selectCity"
+              @area="selectArea"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -13,8 +14,7 @@
         </div>
         <div v-if="showCode" class="box-right col-md-12">
           <pre
-            class="language-javascript code-toolbar"
-          ><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+            class="language-javascript code-toolbar"><code class=" language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
   <span class="token operator">&lt;</span>v<span class="token operator">-</span>distpicker type<span class="token operator">=</span><span class="token string">"mobile"</span> <span class="token keyword">static</span><span class="token operator">-</span>placeholder<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>v<span class="token operator">-</span>distpicker<span class="token operator">&gt;</span>
 <span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
 
@@ -35,23 +35,24 @@
 </template>
 
 <script setup>
-let showCode = $ref(false)
-let select = $ref({ province: '', city: '', area: '' })
-let placeholders = $ref({
+import { ref, reactive } from 'vue'
+let showCode = ref(false)
+let select = reactive({ province: '', city: '', area: '' })
+let placeholders = reactive({
   province: '--- 省 ----',
   city: '--- 市 ---',
   area: '--- 区 ---',
 })
 
-function selectProvince(value) {
+function selectProvince (value) {
   select.province = value
   console.log(value)
 }
-function selectCity(value) {
+function selectCity (value) {
   select.city = value
   console.log(value)
 }
-function selectArea(value) {
+function selectArea (value) {
   select.area = value
   console.log(value)
 }

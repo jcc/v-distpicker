@@ -5,16 +5,8 @@
       <div class="example-box">
         <div class="box-left d-flex align-items-baseline">
           <div class="col-md-7">
-            <v-distpicker
-              :province="select.province"
-              :city="select.city"
-              :area="select.area"
-              :province-disabled="true"
-              :city-disabled="true"
-              @province="selectProvince"
-              @city="selectCity"
-              @area="selectArea"
-            ></v-distpicker>
+            <v-distpicker :province="select.province" :city="select.city" :area="select.area" :province-disabled="true"
+              :city-disabled="true" @province="selectProvince" @city="selectCity" @area="selectArea"></v-distpicker>
           </div>
           <div class="content-show col-md-5">
             <pre><code>{{ select }}</code></pre>
@@ -26,18 +18,19 @@
 </template>
 
 <script setup>
-let showCode = $ref(false)
-let select = $ref({ province: 440000, city: '广州市', area: '海珠区' })
+import { ref, reactive } from 'vue'
+let showCode = ref(false)
+let select = reactive({ province: 440000, city: '广州市', area: '海珠区' })
 
-function selectProvince(value) {
+function selectProvince (value) {
   select.province = value.value
   console.log(value)
 }
-function selectCity(value) {
+function selectCity (value) {
   select.city = value.value
   console.log(value)
 }
-function selectArea(value) {
+function selectArea (value) {
   select.area = value.value
   console.log(value)
 }
